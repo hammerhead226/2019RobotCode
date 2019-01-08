@@ -12,6 +12,18 @@ package frc.robot;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+
+  Joystick joy = new Joystick(0);
+
+  public double getDriverLeftJoystickY() {
+    return joy.getY();
+  }
+
+  public double getDriverRightJoystickX() {
+    return joy.getRawAxis(4);
+    ;
+  }
+
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.

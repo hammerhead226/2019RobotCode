@@ -7,8 +7,13 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 import frc.robot.commands.CheesyDrive;
+
 
 /**
  * Add your docs here.
@@ -29,11 +34,11 @@ public class DriveTrain extends Subsystem {
     setDefaultCommand(new CheesyDrive());
   }
 
-  public void cheesyDrive(double left, double right) {
-    frontLeft.set(ControlMode.PercentOutput, left);
-		rearLeft.set(ControlMode.PercentOutput, left);
+  public void cheesyDrive(double throttle, double turn) {
+    frontLeft.set(ControlMode.PercentOutput, -throttle + turn);
+		rearLeft.set(ControlMode.PercentOutput, -throttle + turn);
 
-		frontRight.set(ControlMode.PercentOutput, -right);
-		rearRight.set(ControlMode.PercentOutput, -right);
+		frontRight.set(ControlMode.PercentOutput, throttle + turn);
+		rearRight.set(ControlMode.PercentOutput, throttle  + turn);
     }
 }

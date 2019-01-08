@@ -8,9 +8,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
-public class CHeesyDrive extends Command {
-  public CHeesyDrive() {
+public class CheesyDrive extends Command {
+  public CheesyDrive() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.driveTrain);
   }
@@ -23,14 +24,8 @@ public class CHeesyDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveTrain.cheesyDrive(Robot.m_oi.getDriverLeftJoystickX() - Robot.m_oi.getDriverLeftJoystickY(),
-        Robot.m_oi.getDriverLeftJoystickX() + Robot.m_oi.getDriverRightJoystickY());
 
-    frontLeft.set(ControlMode.PercentOutput, driver.getRawAxis(4) - driver.getY());
-    rearLeft.set(ControlMode.PercentOutput, driver.getRawAxis(4) - driver.getY());
-
-    frontRight.set(ControlMode.PercentOutput, driver.getRawAxis(4) + driver.getY());
-    rearRight.set(ControlMode.PercentOutput, driver.getRawAxis(4) + driver.getY());
+    Robot.driveTrain.cheesyDrive(Robot.m_oi.getJoyLeftJoystickY(), Robot.m_oi.getJoyRightJoystickX());
 
   }
 

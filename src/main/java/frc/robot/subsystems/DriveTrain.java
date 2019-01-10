@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.CheesyDrive;
 
-
 /**
  * Add your docs here.
  */
@@ -22,11 +21,11 @@ public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private TalonSRX frontLeft = new TalonSRX(RobotMap.FRONT_LEFT_MOTOR);
-	private TalonSRX frontRight = new TalonSRX(RobotMap.FRONT_RIGHT_MOTOR);
-	
-	private TalonSRX rearLeft = new TalonSRX(RobotMap.REAR_LEFT_MOTOR);
-	private TalonSRX rearRight = new TalonSRX(RobotMap.REAR_RIGHT_MOTOR);
+  private TalonSRX frontLeft = new TalonSRX(RobotMap.DT_FRONT_LEFT);
+  private TalonSRX frontRight = new TalonSRX(RobotMap.DT_REAR_LEFT);
+
+  private TalonSRX rearLeft = new TalonSRX(RobotMap.DT_FRONT_RIGHT);
+  private TalonSRX rearRight = new TalonSRX(RobotMap.DT_FRONT_RIGHT);
 
   @Override
   public void initDefaultCommand() {
@@ -36,9 +35,9 @@ public class DriveTrain extends Subsystem {
 
   public void cheesyDrive(double throttle, double turn) {
     frontLeft.set(ControlMode.PercentOutput, -throttle + turn);
-		rearLeft.set(ControlMode.PercentOutput, -throttle + turn);
+    rearLeft.set(ControlMode.PercentOutput, -throttle + turn);
 
-		frontRight.set(ControlMode.PercentOutput, throttle + turn);
-		rearRight.set(ControlMode.PercentOutput, throttle  + turn);
-    }
+    frontRight.set(ControlMode.PercentOutput, throttle + turn);
+    rearRight.set(ControlMode.PercentOutput, throttle + turn);
+  }
 }

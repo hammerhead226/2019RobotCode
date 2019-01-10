@@ -15,15 +15,15 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 
-  Joystick joy = new Joystick(0);
+  Joystick driver = new Joystick(0);
 
-  public double getJoyLeftJoystickY() {
-    return joy.getY();
+  public double getDriverLeftJoystickY() {
+    return driver.getY();
   }
 
-  public double getJoyRightJoystickX() {
-    return joy.getRawAxis(4);
-    
+  public double getDriverRightJoystickX() {
+    return driver.getRawAxis(4);
+
   }
 
   //// CREATING BUTTONS

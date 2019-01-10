@@ -33,11 +33,56 @@ public class DriveTrain extends Subsystem {
     setDefaultCommand(new CheesyDrive());
   }
 
-  public void cheesyDrive(double throttle, double turn) {
-    frontLeft.set(ControlMode.PercentOutput, -throttle + turn);
-    rearLeft.set(ControlMode.PercentOutput, -throttle + turn);
+  private double limit(double value) {
+    if (value > 1.0) {
+      return 1.0;
+    }
+    if (value < -1.0) {
+      return -1.0;
+    }
+    return value;
+  }
 
-    frontRight.set(ControlMode.PercentOutput, throttle + turn);
-    rearRight.set(ControlMode.PercentOutput, throttle + turn);
+  public void cheesyDrive(double xSpeed, double zRotation) {
+
+    xSpeed = limit(xSpeed);
+
+    zRotation = limit(zRotation);
+
+    // Square the inputs (while preserving the sign) to increase fine control
+    // while permitting full power.
+
+    xSpeed = Math.copySign(xSpeed * xSpeed, xSpeed);
+    zRotation = Math.copySign(zRotation * zRotation, zRotation);
+
+    double leftMotorOutput;
+    double rightMotorOutput;
+
+    double maxInput = Math.copySign(Math.max(Math.abs(xSpeed), Math.abs(zRotation)), xSpeed);
+
+    if (xSpeed >= 0.0) {
+      // First quadrant, else second quadrant
+      if (zRotation >= 0.0) {
+        leftMotorOutput = maxInput;
+        rightMotorOutput = xSpeed - zRotation;
+      } else {
+        leftMotorOutput = xSpeed + zRotation;
+        rightMotorOutput = maxInput;
+      }
+    } else {
+      // Third quadrant, else fourth quadrant
+      if (zRotation >= 0.0) {
+        leftMotorOutput = xSpeed + zRotation;
+        rightMotorOutput = maxInput;
+      } else {
+        leftMotorOutput = maxInput;
+      }
+    }
+
+    frontLeft.set(ControlMode.PercentOutput, limit(leftMotorOutput));
+    frontRight.set(ControlMode.PercentOutput, limit(rightMotorOutput));
+
+    rearLeft.follow(frontLeft);
+    rearRight.follow(frontRight);
   }
 }

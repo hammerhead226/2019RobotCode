@@ -41,9 +41,9 @@ def includeDesktopSupport = false
 repositories {
     mavenCentral()
 
-    // flatDir{
-    //     dirs 'libs'
-    // }
+    flatDir{
+        dirs 'libs'
+    }
 }
 
 // Defining my dependencies. In this case, WPILib (+ friends), and vendor libraries.
@@ -51,8 +51,8 @@ repositories {
 dependencies {
     compile wpi.deps.wpilib()
     compile wpi.deps.vendor.java()
-   // compile name: 'SharkMacro-v1.1.4'
-   // compile name: 'HammerheadLib-v1.0'
+   compile name: 'SharkMacro-v1.1.4'
+   compile name: 'HammerheadLib-v1.0'
     nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
     testCompile 'junit:junit:4.12'

@@ -76,6 +76,7 @@ public class DriveTrain extends Subsystem {
         rightMotorOutput = maxInput;
       } else {
         leftMotorOutput = maxInput;
+        rightMotorOutput = xSpeed - zRotation;
       }
     }
 

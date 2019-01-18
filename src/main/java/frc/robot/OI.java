@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Controller;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -15,7 +16,9 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 
-  Joystick driver = new Joystick(0);
+  Controller driver = new Controller(0);
+
+  /*Joystick driver = new Joystick(0);
 
   public double getDriverLeftJoystickY() {
     return driver.getY();
@@ -25,7 +28,7 @@ public class OI {
     return driver.getRawAxis(4);
 
   }
-
+  */
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.

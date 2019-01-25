@@ -7,7 +7,6 @@
 
 package frc.robot;
 import util.Controller;
-import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -17,17 +16,6 @@ public class OI {
 
   public Controller driver = new Controller(0);
 
-  /*Joystick driver = new Joystick(0);
-
-  public double getDriverLeftJoystickY() {
-    return driver.getY();
-  }
-
-  public double getDriverRightJoystickX() {
-    return driver.getRawAxis(4);
-
-  }
-  */
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.

@@ -7,12 +7,11 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Controller;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class CheesyDrive extends Command {
-  public CheesyDrive() {
+public class DT_CheesyDrive extends Command {
+  public DT_CheesyDrive() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.driveTrain);
   }

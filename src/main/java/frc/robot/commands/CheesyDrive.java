@@ -26,7 +26,7 @@ public class CheesyDrive extends Command {
   @Override
   protected void execute() {
 
-    Robot.driveTrain.cheesyDrive(Robot.m_oi.driver.getLeftJoystick_Y, Robot.m_oi.driver.getRightJoystick_X);
+    Robot.driveTrain.cheesyDrive(Robot.m_oi.driver.getLeftJoystick_Y(), Robot.m_oi.driver.getRightJoystick_X());
   }
   // Make this return true when this Command no longer needs to run execute()
   @Override

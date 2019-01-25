@@ -6,8 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-
-import edu.wpi.first.wpilibj.Controller;
+import util.Controller;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -16,7 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 
-  Controller driver = new Controller(0);
+  public Controller driver = new Controller(0);
 
   /*Joystick driver = new Joystick(0);
 

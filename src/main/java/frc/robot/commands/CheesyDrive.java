@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Controller;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -25,10 +26,8 @@ public class CheesyDrive extends Command {
   @Override
   protected void execute() {
 
-    Robot.driveTrain.cheesyDrive(Robot.m_oi.getDriverLeftJoystickY(), Robot.m_oi.getDriverRightJoystickX());
-
+    Robot.driveTrain.cheesyDrive(Robot.m_oi.driver.getLeftJoystick_Y, Robot.m_oi.driver.getRightJoystick_X);
   }
-
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {

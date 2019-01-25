@@ -6,12 +6,16 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+import util.Controller;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+
+  public Controller driver = new Controller(0);
+
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.

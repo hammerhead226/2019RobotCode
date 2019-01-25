@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.commands.CheesyDrive;
 
@@ -34,9 +35,42 @@ public class DriveTrain extends Subsystem {
   }
 
   public DriveTrain(){
-    
+    frontLeft.setInverted(Constants.DT_INVERT_L);
+    rearLeft.setInverted(Constants.DT_INVERT_L);
+
+    frontRight.setInverted(Constants.DT_INVERT_R);
+    rearRight.setInverted(Constants.DT_INVERT_R);
+
     rearLeft.follow(frontLeft);
     rearRight.follow(frontRight);
+
+    frontLeft.setSensorPhase(Constants.DT_LEFT_SENSOR_PHASE);
+    frontRight.setSensorPhase(Constants.DT_RIGHT_SENSOR_PHASE);
+
+    frontLeft.configVoltageCompSaturation(Constants.DT_VOLTAGE_LIMIT, Constants.DT_TIMEOUT);
+    rearLeft.configVoltageCompSaturation(Constants.DT_VOLTAGE_LIMIT, Constants.DT_TIMEOUT);
+    frontRight.configVoltageCompSaturation(Constants.DT_VOLTAGE_LIMIT, Constants.DT_TIMEOUT);
+    rearRight.configVoltageCompSaturation(Constants.DT_VOLTAGE_LIMIT, Constants.DT_TIMEOUT);
+
+    frontLeft.enableVoltageCompensation(Constants.DT_VOLTAGE_LIMIT_ENABLED);
+    rearLeft.enableVoltageCompensation(Constants.DT_VOLTAGE_LIMIT_ENABLED);
+    frontRight.enableVoltageCompensation(Constants.DT_VOLTAGE_LIMIT_ENABLED);
+    rearRight.enableVoltageCompensation(Constants.DT_VOLTAGE_LIMIT_ENABLED);
+
+    frontLeft.configContinuousCurrentLimit(Constants.DT_CURRENT_LIMIT, Constants.DT_TIMEOUT);
+    rearLeft.configContinuousCurrentLimit(Constants.DT_CURRENT_LIMIT, Constants.DT_TIMEOUT);
+    frontRight.configContinuousCurrentLimit(Constants.DT_CURRENT_LIMIT, Constants.DT_TIMEOUT);
+    rearRight.configContinuousCurrentLimit(Constants.DT_CURRENT_LIMIT, Constants.DT_TIMEOUT);
+
+    frontLeft.enableCurrentLimit(Constants.DT_CURRENT_LIMIT_ENABLED);
+    rearLeft.enableCurrentLimit(Constants.DT_CURRENT_LIMIT_ENABLED);
+    frontRight.enableCurrentLimit(Constants.DT_CURRENT_LIMIT_ENABLED);
+    rearRight.enableCurrentLimit(Constants.DT_CURRENT_LIMIT_ENABLED);
+
+    frontLeft.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
+    frontRight.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
+    rearLeft.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
+    rearRight.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
   }
   
   private double limit(double value) {

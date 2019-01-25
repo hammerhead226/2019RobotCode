@@ -29,4 +29,23 @@ public class Constants {
     public static final boolean DT_RIGHT_SENSOR_PHASE = true;
 
     public static final double DT_VOLTAGE_RAMP_RATE = 0.1;
+
+    public static final double EL_VOLTAGE_LIMIT = 11;
+    public static final boolean EL_VOLTAGE_LIMIT_ENABLED = true;
+
+    public static final int EL_CURRENT_LIMIT = 30;
+    public static final boolean EL_CURRENT_LIMIT_ENABLED = false;
+
+    public static final int EL_PIDSLOT_IDX = 0;
+
+    public static final int EL_TIMEOUT = 10;
+
+    public static final boolean EL_SENSOR_PHASE = true;
+
+    public static final double EL_VOLTAGE_RAMP_RATE = 0.1;
+
+    public static final boolean EL_INVERT_ONE = true;
+    public static final boolean EL_INVERT_TWO = true;
+    public static final boolean EL_INVERT_THREE = true;
+    public static final boolean EL_INVERT_FOUR = true;
 }

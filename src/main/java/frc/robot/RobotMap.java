@@ -29,4 +29,9 @@ public class RobotMap {
 
   public static int DT_FRONT_RIGHT = 1;
   public static int DT_REAR_RIGHT = 1;
+
+  public static int EL_ONE = 0;
+  public static int EL_TWO = 0;
+  public static int EL_THREE = 0;
+  public static int EL_FOUR = 0;
 }

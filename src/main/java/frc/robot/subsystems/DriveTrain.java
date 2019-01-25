@@ -33,6 +33,12 @@ public class DriveTrain extends Subsystem {
     setDefaultCommand(new CheesyDrive());
   }
 
+  public DriveTrain(){
+    
+    rearLeft.follow(frontLeft);
+    rearRight.follow(frontRight);
+  }
+  
   private double limit(double value) {
     if (value > 1.0) {
       return 1.0;
@@ -83,7 +89,5 @@ public class DriveTrain extends Subsystem {
     frontLeft.set(ControlMode.PercentOutput, limit(leftMotorOutput));
     frontRight.set(ControlMode.PercentOutput, limit(rightMotorOutput));
 
-    rearLeft.follow(frontLeft);
-    rearRight.follow(frontRight);
   }
 }

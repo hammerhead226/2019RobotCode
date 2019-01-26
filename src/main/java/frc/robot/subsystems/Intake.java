@@ -49,7 +49,7 @@ public class Intake extends Subsystem {
     leftIntake.configOpenloopRamp(Constants.INTAKE_VOLTAGE_RAMP_RATE, Constants.INTAKE_TIMEOUT);
     rightIntake.configOpenloopRamp(Constants.INTAKE_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
   }
-  public void intakeCommand(double spin) {
+  public void DriveIntake(double spin) {
     leftIntake.set(ControlMode.PercentOutput, spin);
     rightIntake.set(ControlMode.PercentOutput, -spin);
   }

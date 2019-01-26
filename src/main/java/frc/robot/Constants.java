@@ -36,7 +36,6 @@ public class Constants {
     public static final int INTAKE_RIGHT_PIDSLOT_IDX = 0;
 
     public static final int DT_TIMEOUT = 10;
-
     public static final int INTAKE_TIMEOUT = 10;
 
     public static final boolean DT_LEFT_SENSOR_PHASE = true;

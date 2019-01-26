@@ -6,6 +6,8 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+
+import frc.robot.auton.*;
 import util.Controller;
 
 /**
@@ -16,6 +18,11 @@ public class OI {
 
   public Controller driver = new Controller(0);
   public Controller manip = new Controller(0);
+
+  public OI(){
+    driver.getSTARTButton().whenPressed(new ToggleProfileRecording());
+    driver.getSELECTButton().whenPressed(new ExecuteMacro());
+  }
 
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a

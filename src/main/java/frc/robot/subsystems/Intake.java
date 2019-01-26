@@ -45,9 +45,6 @@ public class Intake extends Subsystem {
 
     leftIntake.enableCurrentLimit(Constants.INTAKE_CURRENT_LIMIT_ENABLED);
     rightIntake.enableCurrentLimit(Constants.INTAKE_CURRENT_LIMIT_ENABLED);
-
-    leftIntake.configOpenloopRamp(Constants.INTAKE_VOLTAGE_RAMP_RATE, Constants.INTAKE_TIMEOUT);
-    rightIntake.configOpenloopRamp(Constants.INTAKE_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
   }
   public void driveIntake(double speed) {
     leftIntake.set(ControlMode.PercentOutput, speed);

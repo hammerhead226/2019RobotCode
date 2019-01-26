@@ -16,6 +16,8 @@ public class OI {
 
   public Controller driver = new Controller(0);
 
+  public Controller manip = new Controller(0);
+
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.

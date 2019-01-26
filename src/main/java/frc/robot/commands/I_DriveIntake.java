@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class DriveIntake extends Command {
-  public DriveIntake() {
+public class I_DriveIntake extends Command {
+  public I_DriveIntake() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.intake);
   }

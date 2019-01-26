@@ -13,7 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
-import frc.robot.commands.DriveIntake;;
+import frc.robot.commands.I_DriveIntake;;
 
 /**
  * Add your docs here.
@@ -28,7 +28,7 @@ public class Intake extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new DriveIntake());
+    setDefaultCommand(new I_DriveIntake());
   }
   public Intake(){
     leftIntake.setInverted(Constants.INTAKE_INVERT_L);

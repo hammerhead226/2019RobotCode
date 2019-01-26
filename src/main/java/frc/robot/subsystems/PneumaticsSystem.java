@@ -7,7 +7,10 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
@@ -16,9 +19,63 @@ public class PneumaticsSystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+  public Compressor compressor = new Compressor();
+
+  public PneumaticsSystem() {
+    CompressorOn();
+  }
+
+  public void CompressorOn() {
+    compressor.start();
+  }
+
+  public void CompressorOff() {
+    compressor.stop();
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
+
+  private DoubleSolenoid leftIntake = new DoubleSolenoid(RobotMap.INTAKE_LEFT_SHIFTER_1,
+      RobotMap.INTAKE_LEFT_SHIFTER_2);
+  private DoubleSolenoid rightIntake = new DoubleSolenoid(RobotMap.INTAKE_RIGHT_SHIFTER_1,
+      RobotMap.INTAKE_RIGHT_SHIFTER_2);
+  private DoubleSolenoid arm = new DoubleSolenoid(RobotMap.ARM_SHIFTER_1, RobotMap.ARM_SHIFTER_2);
+
+  private DoubleSolenoid.Value leftIntakeVal = DoubleSolenoid.Value.kOff;
+
+  public void shiftIntakeLeft() {
+    if (leftIntakeVal == DoubleSolenoid.Value.kForward) {
+      leftIntakeVal = DoubleSolenoid.Value.kReverse;
+    } else {
+      leftIntakeVal = DoubleSolenoid.Value.kForward;
+    }
+    leftIntake.set(leftIntakeVal);
+  }
+
+  private DoubleSolenoid.Value rightIntakeVal = DoubleSolenoid.Value.kOff;
+
+  public void shiftIntakeRight() {
+    if (rightIntakeVal == DoubleSolenoid.Value.kForward) {
+      rightIntakeVal = DoubleSolenoid.Value.kReverse;
+    } else {
+      rightIntakeVal = DoubleSolenoid.Value.kForward;
+    }
+    rightIntake.set(rightIntakeVal);
+  }
+
+  private DoubleSolenoid.Value armVal = DoubleSolenoid.Value.kOff;
+
+  public void shiftArm() {
+    if (armVal == DoubleSolenoid.Value.kForward) {
+      armVal = DoubleSolenoid.Value.kReverse;
+    } else {
+      armVal = DoubleSolenoid.Value.kForward;
+    }
+    arm.set(armVal);
+  }
+
 }

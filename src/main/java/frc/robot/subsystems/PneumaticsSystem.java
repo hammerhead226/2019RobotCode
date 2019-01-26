@@ -67,6 +67,11 @@ public class PneumaticsSystem extends Subsystem {
     rightIntake.set(rightIntakeVal);
   }
 
+  public void shiftIntake(){
+    shiftIntakeRight();
+    shiftIntakeLeft();
+  }
+
   private DoubleSolenoid.Value armVal = DoubleSolenoid.Value.kOff;
 
   public void shiftArm() {

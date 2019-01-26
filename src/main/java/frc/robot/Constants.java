@@ -25,7 +25,7 @@ public class Constants {
 
     public static final int DT_TIMEOUT = 10;
 
-    public static final boolean DT_LEFT_SENSOR_PHASE = true;
+    public static final boolean DT_LEFT_SENSOR_PHASE = false;
     public static final boolean DT_RIGHT_SENSOR_PHASE = true;
 
     public static final double DT_VOLTAGE_RAMP_RATE = 0.1;

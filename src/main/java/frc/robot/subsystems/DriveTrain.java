@@ -8,8 +8,16 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import org.hammerhead226.sharkmacro.actions.ActionListParser;
+import org.hammerhead226.sharkmacro.actions.ActionRecorder;
+import org.hammerhead226.sharkmacro.motionprofiles.ProfileParser;
+import org.hammerhead226.sharkmacro.motionprofiles.ProfileRecorder;
+import org.hammerhead226.sharkmacro.motionprofiles.ProfileRecorder.RecordingType;
+
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
@@ -23,10 +31,12 @@ public class DriveTrain extends Subsystem {
   // here. Call these from Commands.
 
   private TalonSRX frontLeft = new TalonSRX(RobotMap.DT_FRONT_LEFT);
-  private TalonSRX frontRight = new TalonSRX(RobotMap.DT_REAR_LEFT);
+  private TalonSRX frontRight = new TalonSRX(RobotMap.DT_FRONT_RIGHT);
 
   private TalonSRX rearLeft = new TalonSRX(RobotMap.DT_FRONT_RIGHT);
   private TalonSRX rearRight = new TalonSRX(RobotMap.DT_FRONT_RIGHT);
+
+  private ProfileRecorder recorder = new ProfileRecorder(frontLeft, frontRight, RecordingType.VOLTAGE);
 
   @Override
   public void initDefaultCommand() {
@@ -34,7 +44,7 @@ public class DriveTrain extends Subsystem {
     setDefaultCommand(new DT_CheesyDrive());
   }
 
-  public DriveTrain(){
+  public DriveTrain() {
     frontLeft.setInverted(Constants.DT_INVERT_L);
     rearLeft.setInverted(Constants.DT_INVERT_L);
 
@@ -46,6 +56,9 @@ public class DriveTrain extends Subsystem {
 
     frontLeft.setSensorPhase(Constants.DT_LEFT_SENSOR_PHASE);
     frontRight.setSensorPhase(Constants.DT_RIGHT_SENSOR_PHASE);
+
+    frontLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    frontRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
     frontLeft.configVoltageCompSaturation(Constants.DT_VOLTAGE_LIMIT, Constants.DT_TIMEOUT);
     rearLeft.configVoltageCompSaturation(Constants.DT_VOLTAGE_LIMIT, Constants.DT_TIMEOUT);
@@ -72,7 +85,32 @@ public class DriveTrain extends Subsystem {
     rearLeft.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
     rearRight.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
   }
-  
+
+  public void toggleProfileRecording() {
+    if (recorder.isRecording()) {
+      ProfileParser p = new ProfileParser(ProfileParser.getNewFilename());
+      p.writeToFile(recorder.stop().toProfile());
+      System.out.println("Profile saved.");
+    } else {
+      zeroEncoders();
+      Timer.delay(0.2);
+      System.out.println("Profile recording started.");
+      recorder.start();
+    }
+  }
+
+  public void toggleActionListRecording() {
+    if (ActionRecorder.isRecording()) {
+      ActionListParser al = new ActionListParser(ActionListParser.getNewFilename());
+      al.writeToFile(ActionRecorder.stop());
+      System.out.println("ActionList saved.");
+    } else {
+      Timer.delay(0.2);
+      ActionRecorder.start();
+      System.out.println("ActionList recording started.");
+    }
+  }
+
   private double limit(double value) {
     if (value > 1.0) {
       return 1.0;
@@ -86,11 +124,7 @@ public class DriveTrain extends Subsystem {
   public void cheesyDrive(double xSpeed, double zRotation) {
 
     xSpeed = limit(xSpeed);
-
     zRotation = limit(zRotation);
-
-    // Square the inputs (while preserving the sign) to increase fine control
-    // while permitting full power.
 
     xSpeed = Math.copySign(xSpeed * xSpeed, xSpeed);
     zRotation = Math.copySign(zRotation * zRotation, zRotation);
@@ -123,5 +157,15 @@ public class DriveTrain extends Subsystem {
     frontLeft.set(ControlMode.PercentOutput, limit(leftMotorOutput));
     frontRight.set(ControlMode.PercentOutput, limit(rightMotorOutput));
 
+  }
+
+  public TalonSRX[] getMotionProfileTalons() {
+    return new TalonSRX[] { frontLeft, frontRight };
+  }
+
+  private void zeroEncoders() {
+    frontLeft.setSelectedSensorPosition(0, 0, 0);
+    frontRight.setSelectedSensorPosition(0, 0, 0);
+    System.out.println("Drivetrain encoders zeroed.");
   }
 }

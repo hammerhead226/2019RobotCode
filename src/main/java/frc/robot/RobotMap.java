@@ -29,4 +29,7 @@ public class RobotMap {
 
   public static int DT_FRONT_RIGHT = 1;
   public static int DT_REAR_RIGHT = 1;
+
+  public static int INTAKE_LEFT = 1;
+  public static int INTAKE_RIGHT = 2;
 }

@@ -22,14 +22,14 @@ public class PneumaticsSystem extends Subsystem {
   public Compressor compressor = new Compressor();
 
   public PneumaticsSystem() {
-    CompressorOn();
+    compressorOn();
   }
 
-  public void CompressorOn() {
+  public void compressorOn() {
     compressor.start();
   }
 
-  public void CompressorOff() {
+  public void compressorOff() {
     compressor.stop();
   }
 

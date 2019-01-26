@@ -22,8 +22,8 @@ public class Arm extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private TalonSRX leftArmMotor = new TalonSRX(RobotMap.ARM_LEFT);
-  private TalonSRX rightArmMotor = new TalonSRX(RobotMap.ARM_RIGHT);
+  private TalonSRX left = new TalonSRX(RobotMap.ARM_LEFT);
+  private TalonSRX right = new TalonSRX(RobotMap.ARM_RIGHT);
 
   @Override
   public void initDefaultCommand() {
@@ -32,27 +32,27 @@ public class Arm extends Subsystem {
   }
 
   public Arm(){
-    leftArmMotor.setInverted(Constants.ARM_INVERT_L);
-    rightArmMotor.setInverted(Constants.ARM_INVERT_R);
+    left.setInverted(Constants.ARM_INVERT_L);
+    right.setInverted(Constants.ARM_INVERT_R);
 
-    leftArmMotor.setSensorPhase(Constants.ARM_LEFT_SENSOR_PHASE);
-    rightArmMotor.setSensorPhase(Constants.ARM_RIGHT_SENSOR_PHASE);
+    left.setSensorPhase(Constants.ARM_LEFT_SENSOR_PHASE);
+    right.setSensorPhase(Constants.ARM_RIGHT_SENSOR_PHASE);
 
-    leftArmMotor.configVoltageCompSaturation(Constants.ARM_VOLTAGE_LIMIT, Constants.ARM_TIMEOUT);
-    rightArmMotor.configVoltageCompSaturation(Constants.ARM_VOLTAGE_LIMIT, Constants.ARM_TIMEOUT);
+    left.configVoltageCompSaturation(Constants.ARM_VOLTAGE_LIMIT, Constants.ARM_TIMEOUT);
+    right.configVoltageCompSaturation(Constants.ARM_VOLTAGE_LIMIT, Constants.ARM_TIMEOUT);
 
-    leftArmMotor.enableVoltageCompensation(Constants.ARM_VOLTAGE_LIMIT_ENABLED);
-    rightArmMotor.enableVoltageCompensation(Constants.ARM_VOLTAGE_LIMIT_ENABLED);
+    left.enableVoltageCompensation(Constants.ARM_VOLTAGE_LIMIT_ENABLED);
+    right.enableVoltageCompensation(Constants.ARM_VOLTAGE_LIMIT_ENABLED);
 
-    leftArmMotor.configContinuousCurrentLimit(Constants.ARM_CURRENT_LIMIT, Constants.ARM_TIMEOUT);
-    rightArmMotor.configContinuousCurrentLimit(Constants.ARM_CURRENT_LIMIT, Constants.ARM_TIMEOUT);
+    left.configContinuousCurrentLimit(Constants.ARM_CURRENT_LIMIT, Constants.ARM_TIMEOUT);
+    right.configContinuousCurrentLimit(Constants.ARM_CURRENT_LIMIT, Constants.ARM_TIMEOUT);
 
-    leftArmMotor.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);
-    rightArmMotor.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);
+    left.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);
+    right.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);
   }
 
   public void driveArm(double speed) {
-    leftArmMotor.set(ControlMode.PercentOutput, speed);
-    rightArmMotor.set(ControlMode.PercentOutput, -speed);
+    left.set(ControlMode.PercentOutput, speed);
+    right.set(ControlMode.PercentOutput, -speed);
   }
 }

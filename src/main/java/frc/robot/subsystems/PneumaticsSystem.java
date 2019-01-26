@@ -72,6 +72,11 @@ public class PneumaticsSystem extends Subsystem {
     shiftIntakeLeft();
   }
 
+  public void shiftIntakeNeutral(){
+    rightIntake.set(DoubleSolenoid.Value.kOff);
+    leftIntake.set(DoubleSolenoid.Value.kOff);
+  }
+
   private DoubleSolenoid.Value armVal = DoubleSolenoid.Value.kOff;
 
   public void shiftArm() {
@@ -81,6 +86,10 @@ public class PneumaticsSystem extends Subsystem {
       armVal = DoubleSolenoid.Value.kForward;
     }
     arm.set(armVal);
+  }
+
+  public void shiftArmNeutral(){
+    arm.set(DoubleSolenoid.Value.kOff);;
   }
 
 }

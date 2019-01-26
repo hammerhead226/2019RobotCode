@@ -20,7 +20,7 @@ public class PS_ShiftIntakeNeutral extends InstantCommand {
   public PS_ShiftIntakeNeutral() {
     super();
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.pneumaticsSystem);
   }
 
   // Called once when the command executes

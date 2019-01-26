@@ -17,6 +17,7 @@ import util.Controller;
 public class OI {
 
   public Controller driver = new Controller(0);
+  public Controller manip = new Controller(0);
 
   public OI(){
     driver.getSTARTButton().whenPressed(new ToggleProfileRecording());

@@ -13,7 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
-import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.DriveIntake;;
 
 /**
  * Add your docs here.
@@ -28,7 +28,7 @@ public class Intake extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new IntakeCommand());
+    setDefaultCommand(new DriveIntake());
   }
   public Intake(){
     leftIntake.setInverted(Constants.INTAKE_INVERT_L);
@@ -36,11 +36,9 @@ public class Intake extends Subsystem {
 
     leftIntake.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_LIMIT, Constants.INTAKE_TIMEOUT);
     rightIntake.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_LIMIT, Constants.INTAKE_TIMEOUT);
-    
 
     leftIntake.enableVoltageCompensation(Constants.INTAKE_VOLTAGE_LIMIT_ENABLED);
     rightIntake.enableVoltageCompensation(Constants.INTAKE_VOLTAGE_LIMIT_ENABLED);
-    
 
     leftIntake.configContinuousCurrentLimit(Constants.INTAKE_CURRENT_LIMIT, Constants.INTAKE_TIMEOUT);
     rightIntake.configContinuousCurrentLimit(Constants.INTAKE_CURRENT_LIMIT, Constants.INTAKE_TIMEOUT);

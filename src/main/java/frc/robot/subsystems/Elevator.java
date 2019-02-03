@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -21,9 +22,10 @@ import frc.robot.*;
  */
 public class Elevator extends Subsystem {
   private TalonSRX one = new TalonSRX(RobotMap.EL_ONE);
-  private Victor two = new Victor(RobotMap.EL_TWO);
-  private Victor three = new Victor(RobotMap.EL_THREE);
-  private Victor four = new Victor(RobotMap.EL_FOUR);
+  private VictorSPX two = new VictorSPX(RobotMap.EL_TWO);
+  private VictorSPX three = new VictorSPX(RobotMap.EL_THREE);
+  private VictorSPX four = new VictorSPX(RobotMap.EL_FOUR);
+
 
   private int position = 0;
 
@@ -58,14 +60,8 @@ public class Elevator extends Subsystem {
     four.enableVoltageCompensation(Constants.EL_VOLTAGE_LIMIT_ENABLED);
 
     one.configContinuousCurrentLimit(Constants.EL_CURRENT_LIMIT, Constants.EL_TIMEOUT);
-    three.configContinuousCurrentLimit(Constants.EL_CURRENT_LIMIT, Constants.EL_TIMEOUT);
-    two.configContinuousCurrentLimit(Constants.EL_CURRENT_LIMIT, Constants.EL_TIMEOUT);
-    four.configContinuousCurrentLimit(Constants.EL_CURRENT_LIMIT, Constants.EL_TIMEOUT);
 
     one.enableCurrentLimit(Constants.EL_CURRENT_LIMIT_ENABLED);
-    three.enableCurrentLimit(Constants.EL_CURRENT_LIMIT_ENABLED);
-    two.enableCurrentLimit(Constants.EL_CURRENT_LIMIT_ENABLED);
-    four.enableCurrentLimit(Constants.EL_CURRENT_LIMIT_ENABLED);
 
     one.configOpenloopRamp(Constants.EL_VOLTAGE_RAMP_RATE, Constants.EL_TIMEOUT);
     two.configOpenloopRamp(Constants.EL_VOLTAGE_RAMP_RATE, Constants.EL_TIMEOUT);

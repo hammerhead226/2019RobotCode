@@ -26,6 +26,8 @@ public class Elevator extends Subsystem {
   private VictorSPX three = new VictorSPX(RobotMap.EL_THREE);
   private VictorSPX four = new VictorSPX(RobotMap.EL_FOUR);
 
+  private TalonSRX roller = new TalonSRX(RobotMap.EL_ROLLER);
+
 
   private int position = 0;
 
@@ -40,6 +42,7 @@ public class Elevator extends Subsystem {
     three.setInverted(Constants.EL_INVERT_THREE);
     two.setInverted(Constants.EL_INVERT_TWO);
     four.setInverted(Constants.EL_INVERT_FOUR);
+    roller.setInverted(Constants.EL_INVERT_ROLLER);
 
     four.follow(one);
     three.follow(one);
@@ -53,20 +56,25 @@ public class Elevator extends Subsystem {
     three.configVoltageCompSaturation(Constants.EL_VOLTAGE_LIMIT, Constants.EL_TIMEOUT);
     two.configVoltageCompSaturation(Constants.EL_VOLTAGE_LIMIT, Constants.EL_TIMEOUT);
     four.configVoltageCompSaturation(Constants.EL_VOLTAGE_LIMIT, Constants.EL_TIMEOUT);
+    roller.configVoltageCompSaturation(Constants.EL_VOLTAGE_LIMIT, Constants.EL_TIMEOUT);
 
     one.enableVoltageCompensation(Constants.EL_VOLTAGE_LIMIT_ENABLED);
     three.enableVoltageCompensation(Constants.EL_VOLTAGE_LIMIT_ENABLED);
     two.enableVoltageCompensation(Constants.EL_VOLTAGE_LIMIT_ENABLED);
     four.enableVoltageCompensation(Constants.EL_VOLTAGE_LIMIT_ENABLED);
+    roller.enableVoltageCompensation(Constants.EL_VOLTAGE_LIMIT_ENABLED);
 
     one.configContinuousCurrentLimit(Constants.EL_CURRENT_LIMIT, Constants.EL_TIMEOUT);
+    roller.configContinuousCurrentLimit(Constants.EL_CURRENT_LIMIT, Constants.EL_TIMEOUT);
 
     one.enableCurrentLimit(Constants.EL_CURRENT_LIMIT_ENABLED);
+    roller.enableCurrentLimit(Constants.EL_CURRENT_LIMIT_ENABLED);
 
     one.configOpenloopRamp(Constants.EL_VOLTAGE_RAMP_RATE, Constants.EL_TIMEOUT);
     two.configOpenloopRamp(Constants.EL_VOLTAGE_RAMP_RATE, Constants.EL_TIMEOUT);
     three.configOpenloopRamp(Constants.EL_VOLTAGE_RAMP_RATE, Constants.EL_TIMEOUT);
     four.configOpenloopRamp(Constants.EL_VOLTAGE_RAMP_RATE, Constants.EL_TIMEOUT);
+    roller.configOpenloopRamp(Constants.EL_VOLTAGE_RAMP_RATE, Constants.EL_TIMEOUT);
   }
   
   public void drive(double drive){
@@ -80,5 +88,9 @@ public class Elevator extends Subsystem {
 
   private void updatePosition(){
     position = one.getSelectedSensorPosition();
+  }
+
+  public void driveRoller(double drive){
+    roller.set(ControlMode.PercentOutput, drive);
   }
 }

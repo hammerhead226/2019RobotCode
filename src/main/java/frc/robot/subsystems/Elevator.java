@@ -21,9 +21,9 @@ import frc.robot.*;
  */
 public class Elevator extends Subsystem {
   private TalonSRX one = new TalonSRX(RobotMap.EL_ONE);
-  private TalonSRX two = new TalonSRX(RobotMap.EL_TWO);
-  private TalonSRX three = new TalonSRX(RobotMap.EL_THREE);
-  private TalonSRX four = new TalonSRX(RobotMap.EL_FOUR);
+  private Victor two = new Victor(RobotMap.EL_TWO);
+  private Victor three = new Victor(RobotMap.EL_THREE);
+  private Victor four = new Victor(RobotMap.EL_FOUR);
 
   private int position = 0;
 

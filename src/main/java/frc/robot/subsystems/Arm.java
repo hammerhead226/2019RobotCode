@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
@@ -23,7 +24,7 @@ public class Arm extends Subsystem {
   // here. Call these from Commands.
 
   private TalonSRX left = new TalonSRX(RobotMap.ARM_LEFT);
-  private TalonSRX right = new TalonSRX(RobotMap.ARM_RIGHT);
+  private VictorSPX right = new VictorSPX(RobotMap.ARM_RIGHT);
 
   @Override
   public void initDefaultCommand() {
@@ -45,14 +46,12 @@ public class Arm extends Subsystem {
     right.enableVoltageCompensation(Constants.ARM_VOLTAGE_LIMIT_ENABLED);
 
     left.configContinuousCurrentLimit(Constants.ARM_CURRENT_LIMIT, Constants.ARM_TIMEOUT);
-    right.configContinuousCurrentLimit(Constants.ARM_CURRENT_LIMIT, Constants.ARM_TIMEOUT);
-
     left.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);
-    right.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);
+
+    right.follow(left);
   }
 
   public void driveArm(double speed) {
     left.set(ControlMode.PercentOutput, speed);
-    right.set(ControlMode.PercentOutput, -speed);
   }
 }

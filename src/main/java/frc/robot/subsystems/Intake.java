@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
@@ -23,7 +24,7 @@ public class Intake extends Subsystem {
   // here. Call these from Commands.
 
   private TalonSRX leftIntake = new TalonSRX(RobotMap.INTAKE_LEFT);
-  private TalonSRX rightIntake = new TalonSRX(RobotMap.INTAKE_RIGHT);
+  private VictorSPX rightIntake = new VictorSPX(RobotMap.INTAKE_RIGHT);
 
   @Override
   public void initDefaultCommand() {
@@ -41,14 +42,12 @@ public class Intake extends Subsystem {
     rightIntake.enableVoltageCompensation(Constants.INTAKE_VOLTAGE_LIMIT_ENABLED);
 
     leftIntake.configContinuousCurrentLimit(Constants.INTAKE_CURRENT_LIMIT, Constants.INTAKE_TIMEOUT);
-    rightIntake.configContinuousCurrentLimit(Constants.INTAKE_CURRENT_LIMIT, Constants.INTAKE_TIMEOUT);
-
     leftIntake.enableCurrentLimit(Constants.INTAKE_CURRENT_LIMIT_ENABLED);
-    rightIntake.enableCurrentLimit(Constants.INTAKE_CURRENT_LIMIT_ENABLED);
+
+    rightIntake.follow(leftIntake);
   }
   public void driveIntake(double speed) {
     leftIntake.set(ControlMode.PercentOutput, speed);
-    rightIntake.set(ControlMode.PercentOutput, -speed);
   }
 }
 

@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import org.hammerhead226.sharkmacro.actions.ActionListParser;
 import org.hammerhead226.sharkmacro.actions.ActionRecorder;
@@ -33,8 +34,8 @@ public class DriveTrain extends Subsystem {
   private TalonSRX frontLeft = new TalonSRX(RobotMap.DT_FRONT_LEFT);
   private TalonSRX frontRight = new TalonSRX(RobotMap.DT_FRONT_RIGHT);
 
-  private TalonSRX rearLeft = new TalonSRX(RobotMap.DT_FRONT_RIGHT);
-  private TalonSRX rearRight = new TalonSRX(RobotMap.DT_FRONT_RIGHT);
+  private VictorSPX rearLeft = new VictorSPX(RobotMap.DT_REAR_LEFT);
+  private VictorSPX rearRight = new VictorSPX(RobotMap.DT_REAR_RIGHT);
 
   private ProfileRecorder recorder = new ProfileRecorder(frontLeft, frontRight, RecordingType.VOLTAGE);
 
@@ -71,14 +72,10 @@ public class DriveTrain extends Subsystem {
     rearRight.enableVoltageCompensation(Constants.DT_VOLTAGE_LIMIT_ENABLED);
 
     frontLeft.configContinuousCurrentLimit(Constants.DT_CURRENT_LIMIT, Constants.DT_TIMEOUT);
-    rearLeft.configContinuousCurrentLimit(Constants.DT_CURRENT_LIMIT, Constants.DT_TIMEOUT);
     frontRight.configContinuousCurrentLimit(Constants.DT_CURRENT_LIMIT, Constants.DT_TIMEOUT);
-    rearRight.configContinuousCurrentLimit(Constants.DT_CURRENT_LIMIT, Constants.DT_TIMEOUT);
 
     frontLeft.enableCurrentLimit(Constants.DT_CURRENT_LIMIT_ENABLED);
-    rearLeft.enableCurrentLimit(Constants.DT_CURRENT_LIMIT_ENABLED);
     frontRight.enableCurrentLimit(Constants.DT_CURRENT_LIMIT_ENABLED);
-    rearRight.enableCurrentLimit(Constants.DT_CURRENT_LIMIT_ENABLED);
 
     frontLeft.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
     frontRight.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);

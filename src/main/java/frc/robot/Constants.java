@@ -79,4 +79,5 @@ public class Constants {
     public static final boolean EL_INVERT_TWO = true;
     public static final boolean EL_INVERT_THREE = true;
     public static final boolean EL_INVERT_FOUR = true;
+	public static final boolean EL_INVERT_ROLLER = false;
 }

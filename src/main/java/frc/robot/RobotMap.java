@@ -14,7 +14,7 @@ package frc.robot;
  * floating around.
  */
 public class RobotMap {
-  public static int DT_FRONT_LEFT = 1;
+public static int DT_FRONT_LEFT = 1;
   public static int DT_REAR_LEFT = 0;
   public static int DT_FRONT_RIGHT = 2;
   public static int DT_REAR_RIGHT = 3;
@@ -27,13 +27,12 @@ public class RobotMap {
   public static int INTAKE_RIGHT_SHIFTER_1 = 0;
   public static int INTAKE_RIGHT_SHIFTER_2 = 0;
 
-  public static int DT_FRONT_RIGHT = 1;
-  public static int DT_REAR_RIGHT = 1;
-
   public static int EL_ONE = 0;
   public static int EL_TWO = 0;
   public static int EL_THREE = 0;
   public static int EL_FOUR = 0;
+
+  public static final int EL_ROLLER = 0;
 
   public static int ARM_SHIFTER_1 = 0;
   public static int ARM_SHIFTER_2 = 0;

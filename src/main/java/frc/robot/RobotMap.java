@@ -17,7 +17,7 @@ public class RobotMap {
   public static int DT_FRONT_LEFT = 1;
   public static int DT_REAR_LEFT = 0;
   public static int DT_FRONT_RIGHT = 2;
-  public static int DT_REAR_LEFT = 3;
+  public static int DT_REAR_RIGHT = 3;
 
   public static int INTAKE_LEFT = 1;
   public static int INTAKE_RIGHT = 2;

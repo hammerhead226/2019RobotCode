@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -46,14 +47,14 @@ public class DriveTrain extends Subsystem {
   }
 
   public DriveTrain() {
-    frontLeft.setInverted(Constants.DT_INVERT_L);
-    rearLeft.setInverted(Constants.DT_INVERT_L);
-
-    frontRight.setInverted(Constants.DT_INVERT_R);
-    rearRight.setInverted(Constants.DT_INVERT_R);
-
     rearLeft.follow(frontLeft);
     rearRight.follow(frontRight);
+
+    frontLeft.setInverted(Constants.DT_INVERT_L);
+    rearLeft.setInverted(InvertType.FollowMaster);
+
+    frontRight.setInverted(Constants.DT_INVERT_R);
+    rearRight.setInverted(InvertType.FollowMaster);
 
     frontLeft.setSensorPhase(Constants.DT_LEFT_SENSOR_PHASE);
     frontRight.setSensorPhase(Constants.DT_RIGHT_SENSOR_PHASE);

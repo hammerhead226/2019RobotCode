@@ -36,7 +36,7 @@ public class Arm extends Subsystem {
   public Arm(){
     right.follow(left);
 
-    left.setInverted(Constants.ARM_INVERT_L);
+    left.setInverted(Constants.ARM_INVERT);
     right.setInverted(InvertType.FollowMaster);
 
     left.setSensorPhase(Constants.ARM_LEFT_SENSOR_PHASE);

@@ -70,11 +70,6 @@ public class Elevator extends Subsystem {
     one.enableCurrentLimit(Constants.EL_CURRENT_LIMIT_ENABLED);
     roller.enableCurrentLimit(Constants.EL_CURRENT_LIMIT_ENABLED);
 
-    one.configOpenloopRamp(Constants.EL_VOLTAGE_RAMP_RATE, Constants.EL_TIMEOUT);
-    two.configOpenloopRamp(Constants.EL_VOLTAGE_RAMP_RATE, Constants.EL_TIMEOUT);
-    three.configOpenloopRamp(Constants.EL_VOLTAGE_RAMP_RATE, Constants.EL_TIMEOUT);
-    four.configOpenloopRamp(Constants.EL_VOLTAGE_RAMP_RATE, Constants.EL_TIMEOUT);
-    roller.configOpenloopRamp(Constants.EL_VOLTAGE_RAMP_RATE, Constants.EL_TIMEOUT);
   }
   
   public void drive(double drive){

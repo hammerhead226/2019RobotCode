@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -33,8 +34,10 @@ public class Arm extends Subsystem {
   }
 
   public Arm(){
+    right.follow(left);
+
     left.setInverted(Constants.ARM_INVERT_L);
-    right.setInverted(Constants.ARM_INVERT_R);
+    right.setInverted(InvertType.FollowMaster);
 
     left.setSensorPhase(Constants.ARM_LEFT_SENSOR_PHASE);
     right.setSensorPhase(Constants.ARM_RIGHT_SENSOR_PHASE);
@@ -47,8 +50,6 @@ public class Arm extends Subsystem {
 
     left.configContinuousCurrentLimit(Constants.ARM_CURRENT_LIMIT, Constants.ARM_TIMEOUT);
     left.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);
-
-    right.follow(left);
   }
 
   public void driveArm(double speed) {

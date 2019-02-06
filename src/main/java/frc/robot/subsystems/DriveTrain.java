@@ -47,14 +47,14 @@ public class DriveTrain extends Subsystem {
   }
 
   public DriveTrain() {
+    rearLeft.follow(frontLeft);
+    rearRight.follow(frontRight);
+
     frontLeft.setInverted(Constants.DT_INVERT_L);
     rearLeft.setInverted(InvertType.FollowMaster);
 
     frontRight.setInverted(Constants.DT_INVERT_R);
     rearRight.setInverted(InvertType.FollowMaster);
-
-    rearLeft.follow(frontLeft);
-    rearRight.follow(frontRight);
 
     frontLeft.setSensorPhase(Constants.DT_LEFT_SENSOR_PHASE);
     frontRight.setSensorPhase(Constants.DT_RIGHT_SENSOR_PHASE);

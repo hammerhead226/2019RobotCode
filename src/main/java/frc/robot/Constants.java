@@ -15,8 +15,7 @@ public class Constants {
     //Inverts
     public static final boolean DT_INVERT_L = false;
     public static final boolean DT_INVERT_R = false;
-    public static final boolean INTAKE_INVERT_L = false;
-    public static final boolean INTAKE_INVERT_R = false;
+    public static final boolean INTAKE_INVERT = false;
     public static final boolean ARM_INVERT = false;
     public static final boolean EL_INVERT = true;
     public static final boolean EL_INVERT_ROLLER = false;

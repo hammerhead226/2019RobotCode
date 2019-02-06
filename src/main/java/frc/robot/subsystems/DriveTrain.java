@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 
 import org.hammerhead226.sharkmacro.actions.ActionListParser;
 import org.hammerhead226.sharkmacro.actions.ActionRecorder;
@@ -36,6 +37,8 @@ public class DriveTrain extends Subsystem {
 
   private VictorSPX rearLeft = new VictorSPX(RobotMap.DT_REAR_LEFT);
   private VictorSPX rearRight = new VictorSPX(RobotMap.DT_REAR_RIGHT);
+
+  private PigeonIMU pigeon = new PigeonIMU(RobotMap.PIGEON);
 
   private ProfileRecorder recorder = new ProfileRecorder(frontLeft, frontRight, RecordingType.VOLTAGE);
 

@@ -123,6 +123,11 @@ public class DriveTrain extends Subsystem {
     return value;
   }
 
+  public void tankDrive(double left, double right){
+    frontLeft.set(ControlMode.PercentOutput,left);
+    frontRight.set(ControlMode.PercentOutput, right);
+  }
+
   public void cheesyDrive(double xSpeed, double zRotation) {
 
     xSpeed = limit(xSpeed);

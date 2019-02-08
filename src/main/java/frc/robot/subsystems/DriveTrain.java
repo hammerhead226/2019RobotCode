@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.sensors.PigeonIMU;
@@ -21,6 +22,7 @@ import org.hammerhead226.sharkmacro.motionprofiles.ProfileRecorder.RecordingType
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.commands.DT_CheesyDrive;
@@ -163,9 +165,20 @@ public class DriveTrain extends Subsystem {
     return new TalonSRX[] { frontLeft, frontRight };
   }
 
-  private void zeroEncoders() {
+  public double getYaw(){
+    double[] vals = new double[3];
+    pigeon.getYawPitchRoll(vals);
+    return vals[0];
+  }
+
+  public void zeroEncoders() {
     frontLeft.setSelectedSensorPosition(0, 0, 0);
     frontRight.setSelectedSensorPosition(0, 0, 0);
     System.out.println("Drivetrain encoders zeroed.");
+  }
+
+  public void zeroYaw(){
+    pigeon.setYaw(0);
+    pigeon.setFusedHeading(0);
   }
 }

@@ -26,6 +26,7 @@ public class Arm extends Subsystem {
 
   private TalonSRX main = new TalonSRX(RobotMap.ARM_LEFT);
   private TalonSRX follower = new TalonSRX(RobotMap.ARM_RIGHT);
+  private int setpointPosition = ArmSetpoint.STRAIGHT_UP.position;
 
   @Override
   public void initDefaultCommand() {
@@ -60,7 +61,20 @@ public class Arm extends Subsystem {
     }
   }
 
+  public void setArmSetpoint(ArmSetpoint sp) {
+    this.setpointPosition = sp.position;
+  }
+
+  public int getArmPos() {
+    return main.getSelectedSensorPosition();
+  }
+
   public void driveArm(double speed) {
-    main.set(ControlMode.PercentOutput, speed);
+    if (speed != 0) {
+      main.set(ControlMode.PercentOutput, speed);
+      setpointPosition = getArmPos();
+    } else {
+      main.set(ControlMode.Position, setpointPosition);
+    }
   }
 }

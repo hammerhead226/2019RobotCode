@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
@@ -24,7 +25,7 @@ public class Arm extends Subsystem {
   // here. Call these from Commands.
 
   private TalonSRX main = new TalonSRX(RobotMap.ARM_LEFT);
-  private TalonSRX follower = new TalonSRX(RobotMap.ARM_RIGHT);
+  private VictorSPX follower = new VictorSPX(RobotMap.ARM_RIGHT);
   private int setpointPosition = ArmSetpoint.STRAIGHT_UP.position;
 
   @Override

@@ -33,7 +33,7 @@ public class Arm extends Subsystem {
     setDefaultCommand(new A_DriveArm());
   }
 
-  public Arm(){
+  public Arm() {
     follower.follow(main);
 
     main.setInverted(Constants.ARM_INVERT);
@@ -52,10 +52,11 @@ public class Arm extends Subsystem {
     main.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);
   }
 
-  public enum ArmSetpoint{
+  public enum ArmSetpoint {
     GROUND(0), BALL_INTAKE(0), STRAIGHT_UP(0), HATCH_SCORING(0);
     public int position;
-    private ArmSetpoint(int position){
+
+    private ArmSetpoint(int position) {
       this.position = position;
     }
   }
@@ -68,7 +69,7 @@ public class Arm extends Subsystem {
     return main.getSelectedSensorPosition();
   }
 
-  public void zeroEncoder(){
+  public void zeroEncoder() {
     main.getSensorCollection().setPulseWidthPosition(0, Constants.ARM_TIMEOUT);
   }
 

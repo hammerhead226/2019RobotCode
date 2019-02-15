@@ -25,7 +25,7 @@ public class Arm extends Subsystem {
   // here. Call these from Commands.
 
   private TalonSRX left = new TalonSRX(RobotMap.ARM_LEFT);
-  private VictorSPX right = new VictorSPX(RobotMap.ARM_RIGHT);
+  private TalonSRX right = new TalonSRX(RobotMap.ARM_RIGHT);
 
   @Override
   public void initDefaultCommand() {

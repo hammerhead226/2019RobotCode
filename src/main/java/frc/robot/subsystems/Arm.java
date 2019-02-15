@@ -24,8 +24,8 @@ public class Arm extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private TalonSRX left = new TalonSRX(RobotMap.ARM_LEFT);
-  private TalonSRX right = new TalonSRX(RobotMap.ARM_RIGHT);
+  private TalonSRX main = new TalonSRX(RobotMap.ARM_LEFT);
+  private TalonSRX follower = new TalonSRX(RobotMap.ARM_RIGHT);
 
   @Override
   public void initDefaultCommand() {
@@ -34,22 +34,22 @@ public class Arm extends Subsystem {
   }
 
   public Arm(){
-    right.follow(left);
+    follower.follow(main);
 
-    left.setInverted(Constants.ARM_INVERT);
-    right.setInverted(InvertType.FollowMaster);
+    main.setInverted(Constants.ARM_INVERT);
+    follower.setInverted(InvertType.FollowMaster);
 
-    left.setSensorPhase(Constants.ARM_LEFT_SENSOR_PHASE);
-    right.setSensorPhase(Constants.ARM_RIGHT_SENSOR_PHASE);
+    main.setSensorPhase(Constants.ARM_LEFT_SENSOR_PHASE);
+    follower.setSensorPhase(Constants.ARM_RIGHT_SENSOR_PHASE);
 
-    left.configVoltageCompSaturation(Constants.ARM_VOLTAGE_LIMIT, Constants.ARM_TIMEOUT);
-    right.configVoltageCompSaturation(Constants.ARM_VOLTAGE_LIMIT, Constants.ARM_TIMEOUT);
+    main.configVoltageCompSaturation(Constants.ARM_VOLTAGE_LIMIT, Constants.ARM_TIMEOUT);
+    follower.configVoltageCompSaturation(Constants.ARM_VOLTAGE_LIMIT, Constants.ARM_TIMEOUT);
 
-    left.enableVoltageCompensation(Constants.ARM_VOLTAGE_LIMIT_ENABLED);
-    right.enableVoltageCompensation(Constants.ARM_VOLTAGE_LIMIT_ENABLED);
+    main.enableVoltageCompensation(Constants.ARM_VOLTAGE_LIMIT_ENABLED);
+    follower.enableVoltageCompensation(Constants.ARM_VOLTAGE_LIMIT_ENABLED);
 
-    left.configContinuousCurrentLimit(Constants.ARM_CURRENT_LIMIT, Constants.ARM_TIMEOUT);
-    left.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);
+    main.configContinuousCurrentLimit(Constants.ARM_CURRENT_LIMIT, Constants.ARM_TIMEOUT);
+    main.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);
   }
 
   public enum ArmSetpoint{
@@ -61,6 +61,6 @@ public class Arm extends Subsystem {
   }
 
   public void driveArm(double speed) {
-    left.set(ControlMode.PercentOutput, speed);
+    main.set(ControlMode.PercentOutput, speed);
   }
 }

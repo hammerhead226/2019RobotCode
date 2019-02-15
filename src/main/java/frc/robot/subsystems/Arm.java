@@ -68,6 +68,10 @@ public class Arm extends Subsystem {
     return main.getSelectedSensorPosition();
   }
 
+  public void zeroEncoder(){
+    main.getSensorCollection().setPulseWidthPosition(0, Constants.ARM_TIMEOUT);
+  }
+
   public void driveArm(double speed) {
     if (speed != 0) {
       main.set(ControlMode.PercentOutput, speed);

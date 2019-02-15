@@ -52,6 +52,14 @@ public class Arm extends Subsystem {
     left.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);
   }
 
+  public enum ArmSetpoint{
+    DISK_INTAKE(0), BALL_INTAKE(0), STRAIGHT_UP(0), HATCH_SCORING(0);
+    public int position;
+    private ArmSetpoint(int position){
+      this.position = position;
+    }
+  }
+
   public void driveArm(double speed) {
     left.set(ControlMode.PercentOutput, speed);
   }

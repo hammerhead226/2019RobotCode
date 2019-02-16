@@ -59,8 +59,7 @@ public class Constants {
     //Sensor Phase
     public static final boolean DT_LEFT_SENSOR_PHASE = true;
     public static final boolean DT_RIGHT_SENSOR_PHASE = true;
-    public static final boolean ARM_LEFT_SENSOR_PHASE = true;
-    public static final boolean ARM_RIGHT_SENSOR_PHASE = true;
+    public static final boolean ARM_SENSOR_PHASE = true;
     public static final boolean EL_SENSOR_PHASE = true;
 
     //Misc

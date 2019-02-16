@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.commands.A_DriveArm;
@@ -33,6 +34,14 @@ public class Arm extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new A_DriveArm());
+  }
+
+  public void log(){
+    SmartDashboard.putNumber("arm setpoint", setpointPosition);
+    SmartDashboard.putNumber("arm relative position", main.getSelectedSensorPosition());
+    SmartDashboard.putNumber("arm absolute position", main.getSensorCollection().getPulseWidthPosition());
+    SmartDashboard.putNumber("target", main.getClosedLoopTarget());
+    SmartDashboard.putNumber("error", main.getClosedLoopError());
   }
 
   public Arm() {

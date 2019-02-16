@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -24,8 +25,8 @@ public class Arm extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private TalonSRX main = new TalonSRX(RobotMap.ARM_LEFT);
-  private VictorSPX follower = new VictorSPX(RobotMap.ARM_RIGHT);
+  private TalonSRX main = new TalonSRX(RobotMap.ARM_MAIN);
+  private VictorSPX follower = new VictorSPX(RobotMap.ARM_FOLLOWER);
   private int setpointPosition = ArmSetpoint.STRAIGHT_UP.position;
 
   @Override
@@ -38,7 +39,7 @@ public class Arm extends Subsystem {
     follower.follow(main);
 
     main.setInverted(Constants.ARM_INVERT);
-    follower.setInverted(InvertType.FollowMaster);
+    follower.setInverted(InvertType.OpposeMaster);
 
     main.setSensorPhase(Constants.ARM_LEFT_SENSOR_PHASE);
     follower.setSensorPhase(Constants.ARM_RIGHT_SENSOR_PHASE);
@@ -48,6 +49,11 @@ public class Arm extends Subsystem {
 
     main.enableVoltageCompensation(Constants.ARM_VOLTAGE_LIMIT_ENABLED);
     follower.enableVoltageCompensation(Constants.ARM_VOLTAGE_LIMIT_ENABLED);
+
+    main.configPeakOutputForward(Constants.ARM_PEAK_OUTPUT);
+    main.configPeakOutputReverse(-Constants.ARM_PEAK_OUTPUT);
+    follower.configPeakOutputForward(Constants.ARM_PEAK_OUTPUT);
+    follower.configPeakOutputReverse(-Constants.ARM_PEAK_OUTPUT);
 
     main.configContinuousCurrentLimit(Constants.ARM_CURRENT_LIMIT, Constants.ARM_TIMEOUT);
     main.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);

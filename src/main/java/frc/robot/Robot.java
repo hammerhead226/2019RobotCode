@@ -105,10 +105,7 @@ public class Robot extends TimedRobot {
      * ExampleCommand(); break; }
      */
 
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
+    driveTrain.autonomousInit();
   }
 
   /**

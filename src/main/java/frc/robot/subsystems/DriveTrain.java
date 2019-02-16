@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 
 import org.hammerhead226.sharkmacro.actions.ActionListParser;
 import org.hammerhead226.sharkmacro.actions.ActionRecorder;
@@ -19,11 +20,16 @@ import org.hammerhead226.sharkmacro.motionprofiles.ProfileParser;
 import org.hammerhead226.sharkmacro.motionprofiles.ProfileRecorder;
 import org.hammerhead226.sharkmacro.motionprofiles.ProfileRecorder.RecordingType;
 
+import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.commands.DT_CheesyDrive;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.PathfinderFRC;
+import jaci.pathfinder.Trajectory;
+import jaci.pathfinder.followers.EncoderFollower;
 
 /**
  * Add your docs here.
@@ -39,6 +45,18 @@ public class DriveTrain extends Subsystem {
   private VictorSPX rearRight = new VictorSPX(RobotMap.DT_REAR_RIGHT);
 
   private ProfileRecorder recorder = new ProfileRecorder(frontLeft, frontRight, RecordingType.VOLTAGE);
+
+  private PigeonIMU imu = new PigeonIMU(new TalonSRX(0));
+
+  private EncoderFollower left_follower, right_follower;
+
+  private String left_file, right_file;
+
+  private int ticks_per_revolution;
+  private double wheel_diameter;
+  private double k_max_velocity;
+
+  private Notifier m_follower_notifier;
 
   @Override
   public void initDefaultCommand() {
@@ -165,5 +183,46 @@ public class DriveTrain extends Subsystem {
     frontLeft.setSelectedSensorPosition(0, 0, 0);
     frontRight.setSelectedSensorPosition(0, 0, 0);
     System.out.println("Drivetrain encoders zeroed.");
+  }
+
+  public void autonomousInit(){
+    Trajectory left_trajectory = PathfinderFRC.getTrajectory(left_file);
+    Trajectory right_trajectory = PathfinderFRC.getTrajectory(right_file);
+
+    left_follower = new EncoderFollower(left_trajectory);
+    right_follower = new EncoderFollower(right_trajectory);
+
+    left_follower.configureEncoder(frontLeft.getSelectedSensorPosition(), ticks_per_revolution, wheel_diameter);
+    left_follower.configurePIDVA(1, 0, 0, 1/k_max_velocity, 0);
+
+    right_follower.configureEncoder(frontRight.getSelectedSensorPosition(), ticks_per_revolution, wheel_diameter);
+    right_follower.configurePIDVA(1, 0, 0, 1/k_max_velocity, 0);
+    
+    m_follower_notifier = new Notifier(this::followPath);
+    m_follower_notifier.startPeriodic(left_trajectory.get(0).dt);
+  }
+
+  private void followPath(){
+    if(left_follower.isFinished()|| right_follower.isFinished()){
+      m_follower_notifier.stop();
+    }else{
+      double left_speed = left_follower.calculate(frontLeft.getSelectedSensorPosition());
+      double right_speed = right_follower.calculate(frontRight.getSelectedSensorPosition());
+      
+      double heading = imu.getCompassHeading();
+      double desired_heading = Pathfinder.r2d(left_follower.getHeading());
+      double heading_difference = Pathfinder.boundHalfDegrees(desired_heading - heading);
+      double turn = 0.8 * (-1.0/80.0) * heading_difference;
+
+      frontLeft.set(ControlMode.PercentOutput, left_speed + turn);
+      frontRight.set(ControlMode.PercentOutput, right_speed - turn);
+    }
+    
+      
+  }
+  public void cancel(){
+    m_follower_notifier.stop();
+    frontLeft.set(ControlMode.PercentOutput, 0);
+    frontRight.set(ControlMode.PercentOutput, 0);
   }
 }

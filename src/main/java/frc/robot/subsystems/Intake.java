@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -32,8 +33,8 @@ public class Intake extends Subsystem {
     setDefaultCommand(new I_DriveIntake());
   }
   public Intake(){
-    leftIntake.setInverted(Constants.INTAKE_INVERT_L);
-    rightIntake.setInverted(Constants.INTAKE_INVERT_R);
+    leftIntake.setInverted(Constants.INTAKE_INVERT);
+    rightIntake.setInverted(InvertType.OpposeMaster);
 
     leftIntake.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_LIMIT, Constants.INTAKE_TIMEOUT);
     rightIntake.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_LIMIT, Constants.INTAKE_TIMEOUT);

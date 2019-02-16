@@ -51,14 +51,14 @@ public class DriveTrain extends Subsystem {
   }
 
   public DriveTrain() {
-    frontLeft.setInverted(Constants.DT_INVERT_L);
-    rearLeft.setInverted(Constants.DT_INVERT_L);
-
-    frontRight.setInverted(Constants.DT_INVERT_R);
-    rearRight.setInverted(Constants.DT_INVERT_R);
-
     rearLeft.follow(frontLeft);
     rearRight.follow(frontRight);
+
+    frontLeft.setInverted(Constants.DT_INVERT_L);
+    rearLeft.setInverted(InvertType.FollowMaster);
+
+    frontRight.setInverted(Constants.DT_INVERT_R);
+    rearRight.setInverted(InvertType.FollowMaster);
 
     frontLeft.setSensorPhase(Constants.DT_LEFT_SENSOR_PHASE);
     frontRight.setSensorPhase(Constants.DT_RIGHT_SENSOR_PHASE);
@@ -139,13 +139,13 @@ public class DriveTrain extends Subsystem {
     double leftMotorOutput;
     double rightMotorOutput;
 
-    double maxInput = Math.copySign(Math.max(Math.abs(xSpeed), Math.abs(zRotation)), xSpeed);
+    double maxInput = Math.copySign(Math.max(Math.abs(xSpeed), Math.abs(zRotation)), zRotation);
 
     if (xSpeed >= 0.0) {
       // First quadrant, else second quadrant
       if (zRotation >= 0.0) {
         leftMotorOutput = maxInput;
-        rightMotorOutput = xSpeed - zRotation;
+        rightMotorOutput = zRotation - xSpeed;
       } else {
         leftMotorOutput = xSpeed + zRotation;
         rightMotorOutput = maxInput;
@@ -157,7 +157,7 @@ public class DriveTrain extends Subsystem {
         rightMotorOutput = maxInput;
       } else {
         leftMotorOutput = maxInput;
-        rightMotorOutput = xSpeed - zRotation;
+        rightMotorOutput = zRotation - xSpeed;
       }
     }
 

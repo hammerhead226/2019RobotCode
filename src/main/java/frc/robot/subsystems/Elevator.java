@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -22,7 +23,7 @@ import frc.robot.*;
  */
 public class Elevator extends Subsystem {
   private TalonSRX one = new TalonSRX(RobotMap.EL_ONE);
-  private VictorSPX two = new VictorSPX(RobotMap.EL_TWO);
+  private TalonSRX two = new TalonSRX(RobotMap.EL_TWO);
   private VictorSPX three = new VictorSPX(RobotMap.EL_THREE);
   private VictorSPX four = new VictorSPX(RobotMap.EL_FOUR);
 
@@ -38,15 +39,16 @@ public class Elevator extends Subsystem {
   }
 
   public Elevator(){
-    one.setInverted(Constants.EL_INVERT_ONE);
-    three.setInverted(Constants.EL_INVERT_THREE);
-    two.setInverted(Constants.EL_INVERT_TWO);
-    four.setInverted(Constants.EL_INVERT_FOUR);
-    roller.setInverted(Constants.EL_INVERT_ROLLER);
 
     four.follow(one);
     three.follow(one);
     two.follow(one);
+
+    one.setInverted(Constants.EL_INVERT);
+    three.setInverted(InvertType.FollowMaster);
+    two.setInverted(InvertType.FollowMaster);
+    four.setInverted(InvertType.FollowMaster);
+    roller.setInverted(Constants.EL_INVERT_ROLLER);
 
     one.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.EL_PIDSLOT_IDX, Constants.EL_TIMEOUT);
     one.setSensorPhase(Constants.EL_SENSOR_PHASE);

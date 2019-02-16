@@ -26,13 +26,13 @@ import frc.robot.subsystems.PneumaticsSystem;
  * project.
  */
 public class Robot extends TimedRobot {
+  public static DriveTrain driveTrain;
+  public static Elevator elevator;
+  public static Intake intake;
+  public static PneumaticsSystem pneumaticsSystem;
+  public static Arm arm;
   public static OI m_oi;
-  public static DriveTrain driveTrain = new DriveTrain();
-  public static Elevator elevator = new Elevator();
-  public static Intake intake = new Intake();
-  public static PneumaticsSystem pneumaticsSystem = new PneumaticsSystem();
-  public static Arm arm = new Arm();
-
+  
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -42,6 +42,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    arm = new Arm();
+    driveTrain = new DriveTrain();
+    elevator = new Elevator();
+    intake = new Intake();
+    pneumaticsSystem = new PneumaticsSystem();
     m_oi = new OI();
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());

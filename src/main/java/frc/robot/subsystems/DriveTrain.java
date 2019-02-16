@@ -54,7 +54,7 @@ public class DriveTrain extends Subsystem {
 
   private int ticks_per_revolution;
   private double wheel_diameter;
-  private double k_max_velocity;
+  private double max_velocity;
 
   private Notifier m_follower_notifier;
 
@@ -193,10 +193,10 @@ public class DriveTrain extends Subsystem {
     right_follower = new EncoderFollower(right_trajectory);
 
     left_follower.configureEncoder(frontLeft.getSelectedSensorPosition(), ticks_per_revolution, wheel_diameter);
-    left_follower.configurePIDVA(1, 0, 0, 1/k_max_velocity, 0);
+    left_follower.configurePIDVA(1, 0, 0, 1/max_velocity, 0);
 
     right_follower.configureEncoder(frontRight.getSelectedSensorPosition(), ticks_per_revolution, wheel_diameter);
-    right_follower.configurePIDVA(1, 0, 0, 1/k_max_velocity, 0);
+    right_follower.configurePIDVA(1, 0, 0, 1/max_velocity, 0);
     
     m_follower_notifier = new Notifier(this::followPath);
     m_follower_notifier.startPeriodic(left_trajectory.get(0).dt);

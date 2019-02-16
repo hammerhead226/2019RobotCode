@@ -21,6 +21,8 @@ import org.hammerhead226.sharkmacro.motionprofiles.ProfileRecorder.RecordingType
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.commands.DT_CheesyDrive;
@@ -44,6 +46,15 @@ public class DriveTrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new DT_CheesyDrive());
+  }
+
+  public void log(){
+    ShuffleboardTab drivetrain = Shuffleboard.getTab("drive train");
+    Shuffleboard.selectTab("drive train");
+    drivetrain.add("frontLeft motor position", frontLeft.getSelectedSensorPosition()).withSize(4,4).withPosition(0,0);
+    drivetrain.add("frontLeft motor current", frontLeft.getOutputCurrent()).withSize(4,4).withPosition(0, 4);
+    drivetrain.add("frontRight motor position", frontLeft.getSelectedSensorPosition()).withSize(4,4).withPosition(4, 0);
+    drivetrain.add("frontRight motor current", frontLeft.getOutputCurrent()).withSize(4,4).withPosition(4, 4);
   }
 
   public DriveTrain() {

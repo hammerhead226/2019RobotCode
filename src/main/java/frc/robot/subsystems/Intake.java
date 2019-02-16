@@ -13,6 +13,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.commands.I_DriveIntake;;
@@ -32,6 +34,14 @@ public class Intake extends Subsystem {
     // Set the default command for a subsystem here.
     setDefaultCommand(new I_DriveIntake());
   }
+
+  public void log(){
+    ShuffleboardTab intake = Shuffleboard.getTab("intake");
+    Shuffleboard.selectTab("intake");
+    intake.add("arm position", leftIntake.getSelectedSensorPosition()).withSize(4, 4).withPosition(0, 0);
+    intake.add("left motor current", leftIntake.getOutputCurrent()).withSize(4, 4).withPosition(0, 4);
+  }
+
   public Intake(){
     leftIntake.setInverted(Constants.INTAKE_INVERT);
     rightIntake.setInverted(InvertType.OpposeMaster);

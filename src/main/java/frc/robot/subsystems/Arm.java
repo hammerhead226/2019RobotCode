@@ -13,6 +13,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.commands.A_DriveArm;
@@ -33,6 +35,13 @@ public class Arm extends Subsystem {
     setDefaultCommand(new A_DriveArm());
   }
 
+  public void log(){
+    ShuffleboardTab arm = Shuffleboard.getTab("arm");
+    Shuffleboard.selectTab("arm");
+    arm.add("arm position", left.getSelectedSensorPosition()).withSize(4,4).withPosition(0,0);
+    arm.add("left motor current", left.getOutputCurrent()).withSize(4,4).withPosition(4,0);
+  }
+
   public Arm(){
     right.follow(left);
 
@@ -50,6 +59,10 @@ public class Arm extends Subsystem {
 
     left.configContinuousCurrentLimit(Constants.ARM_CURRENT_LIMIT, Constants.ARM_TIMEOUT);
     left.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);
+  }
+
+  public int getArmPos() {
+    return left.getSelectedSensorPosition();
   }
 
   public void driveArm(double speed) {

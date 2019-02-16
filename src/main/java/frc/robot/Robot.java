@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Arm;
@@ -35,6 +37,15 @@ public class Robot extends TimedRobot {
   
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+  public void log(){
+    ShuffleboardTab visionTab = Shuffleboard.getTab("visionTab");
+    Shuffleboard.selectTab("visionTab");
+    visionTab.add("arm position", arm.getArmPos()).withSize(4, 4).withPosition(12, 0);
+    //visionTab.add("limelight vision", video);
+    //visionTab.add("toggle compressor command", pneumaticsSystem.compressorOn());
+    
+  }
 
   /**
    * This function is run when the robot is first started up and should be used

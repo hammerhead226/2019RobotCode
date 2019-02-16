@@ -10,13 +10,15 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import frc.robot.Constants;
 import frc.robot.RobotMap;
-import frc.robot.commands.*;
-import frc.robot.*;
+import frc.robot.commands.EL_Drive;
 
 /**
  * Add your docs here.
@@ -38,6 +40,13 @@ public class Elevator extends Subsystem {
     setDefaultCommand(new EL_Drive());
   }
 
+  public void log(){
+    ShuffleboardTab elevator = Shuffleboard.getTab("elevator");
+    Shuffleboard.selectTab("elevator");
+    elevator.add("arm position", one.getSelectedSensorPosition()).withSize(4, 4).withPosition(0, 0);
+    elevator.add("left motor current", one.getOutputCurrent()).withSize(4,4).withPosition(0,4);
+  }
+  
   public Elevator(){
 
     four.follow(one);

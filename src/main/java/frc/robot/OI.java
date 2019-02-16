@@ -7,7 +7,15 @@
 
 package frc.robot;
 
-import frc.robot.auton.*;
+import frc.robot.auton.ExecuteMacro;
+import frc.robot.auton.ToggleProfileRecording;
+import frc.robot.commands.A_SetpointBall;
+import frc.robot.commands.A_SetpointGround;
+import frc.robot.commands.A_SetpointHatch;
+import frc.robot.commands.A_SetpointHigh;
+import frc.robot.commands.A_ZeroEncoder;
+import frc.robot.commands.PS_ShiftArm;
+import frc.robot.commands.PS_ShiftIntake;
 import util.Controller;
 
 /**
@@ -22,6 +30,16 @@ public class OI {
   public OI(){
     driver.getSTARTButton().whenPressed(new ToggleProfileRecording());
     driver.getSELECTButton().whenPressed(new ExecuteMacro());
+
+    manip.getRBButton().whenPressed(new PS_ShiftArm());
+    manip.getLBButton().whenPressed(new PS_ShiftIntake());
+
+    manip.getSTARTButton().whenPressed(new A_ZeroEncoder());
+
+    manip.getAButton().whenPressed(new A_SetpointGround());
+    manip.getBButton().whenPressed(new A_SetpointHatch());
+    manip.getXButton().whenPressed(new A_SetpointBall());
+    manip.getYButton().whenPressed(new A_SetpointHigh());
   }
 
 }

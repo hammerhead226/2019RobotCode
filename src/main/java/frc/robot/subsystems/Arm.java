@@ -47,11 +47,11 @@ public class Arm extends Subsystem {
   public Arm() {
     follower.follow(main);
 
+    main.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    main.setSensorPhase(Constants.ARM_SENSOR_PHASE);
+
     main.setInverted(Constants.ARM_INVERT);
     follower.setInverted(InvertType.OpposeMaster);
-
-    main.setSensorPhase(Constants.ARM_LEFT_SENSOR_PHASE);
-    follower.setSensorPhase(Constants.ARM_RIGHT_SENSOR_PHASE);
 
     main.configVoltageCompSaturation(Constants.ARM_VOLTAGE_LIMIT, Constants.ARM_TIMEOUT);
     follower.configVoltageCompSaturation(Constants.ARM_VOLTAGE_LIMIT, Constants.ARM_TIMEOUT);
@@ -86,7 +86,8 @@ public class Arm extends Subsystem {
   }
 
   public void zeroEncoder() {
-    main.getSensorCollection().setPulseWidthPosition(0, Constants.ARM_TIMEOUT);
+    main.setSelectedSensorPosition(0);
+    setpointPosition = 0;
   }
 
   public void driveArm(double speed) {

@@ -204,7 +204,7 @@ public class DriveTrain extends Subsystem {
 
   private void followPath(){
     if(left_follower.isFinished()|| right_follower.isFinished()){
-      m_follower_notifier.stop();
+      cancel();
     }else{
       double left_speed = left_follower.calculate(frontLeft.getSelectedSensorPosition());
       double right_speed = right_follower.calculate(frontRight.getSelectedSensorPosition());

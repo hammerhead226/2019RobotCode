@@ -37,7 +37,7 @@ public class RobotMap {
   public static int ARM_SHIFTER_1 = 0;
   public static int ARM_SHIFTER_2 = 7;
 
-  public static int ARM_LEFT = 5;
-  public static int ARM_RIGHT = 15;
+  public static int ARM_MAIN = 5;
+  public static int ARM_FOLLOWER = 15;
 
 }

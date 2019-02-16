@@ -26,7 +26,7 @@ public class A_SetpointHatch extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
-    Robot.arm.setArmSetpoint(ArmSetpoint.STRAIGHT_UP);
+    Robot.arm.setArmSetpoint(ArmSetpoint.HATCH_SCORING);
   }
 
 }

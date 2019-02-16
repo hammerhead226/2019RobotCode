@@ -63,7 +63,8 @@ public class Constants {
     public static final boolean ARM_RIGHT_SENSOR_PHASE = true;
     public static final boolean EL_SENSOR_PHASE = true;
 
-    //Ramp Rates
+    //Misc
     public static final double DT_VOLTAGE_RAMP_RATE = 0.1;
+    public static final double ARM_PEAK_OUTPUT = 0.5;
   
 }

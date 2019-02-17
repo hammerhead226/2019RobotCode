@@ -25,7 +25,7 @@ import frc.robot.commands.EL_Drive;
  */
 public class Elevator extends Subsystem {
   private TalonSRX one = new TalonSRX(RobotMap.EL_ONE);
-  private VictorSPX two = new VictorSPX(RobotMap.EL_TWO);
+  private TalonSRX two = new TalonSRX(RobotMap.EL_TWO);
   private VictorSPX three = new VictorSPX(RobotMap.EL_THREE);
   private VictorSPX four = new VictorSPX(RobotMap.EL_FOUR);
 

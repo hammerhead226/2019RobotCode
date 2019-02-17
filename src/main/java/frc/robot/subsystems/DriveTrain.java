@@ -37,7 +37,7 @@ public class DriveTrain extends Subsystem {
   private TalonSRX frontLeft = new TalonSRX(RobotMap.DT_FRONT_LEFT);
   private TalonSRX frontRight = new TalonSRX(RobotMap.DT_FRONT_RIGHT);
 
-  private VictorSPX rearLeft = new VictorSPX(RobotMap.DT_REAR_LEFT);
+  private TalonSRX rearLeft = new TalonSRX(RobotMap.DT_REAR_LEFT);
   private VictorSPX rearRight = new VictorSPX(RobotMap.DT_REAR_RIGHT);
 
   private ProfileRecorder recorder = new ProfileRecorder(frontLeft, frontRight, RecordingType.VOLTAGE);
@@ -141,13 +141,13 @@ public class DriveTrain extends Subsystem {
     double leftMotorOutput;
     double rightMotorOutput;
 
-    double maxInput = Math.copySign(Math.max(Math.abs(xSpeed), Math.abs(zRotation)), xSpeed);
+    double maxInput = Math.copySign(Math.max(Math.abs(xSpeed), Math.abs(zRotation)), zRotation);
 
     if (xSpeed >= 0.0) {
       // First quadrant, else second quadrant
       if (zRotation >= 0.0) {
         leftMotorOutput = maxInput;
-        rightMotorOutput = xSpeed - zRotation;
+        rightMotorOutput = zRotation - xSpeed;
       } else {
         leftMotorOutput = xSpeed + zRotation;
         rightMotorOutput = maxInput;
@@ -159,7 +159,7 @@ public class DriveTrain extends Subsystem {
         rightMotorOutput = maxInput;
       } else {
         leftMotorOutput = maxInput;
-        rightMotorOutput = xSpeed - zRotation;
+        rightMotorOutput = zRotation - xSpeed;
       }
     }
 

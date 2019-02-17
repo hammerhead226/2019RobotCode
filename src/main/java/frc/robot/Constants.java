@@ -13,8 +13,8 @@ package frc.robot;
 public class Constants {
 
     //Inverts
-    public static final boolean DT_INVERT_L = false;
-    public static final boolean DT_INVERT_R = false;
+    public static final boolean DT_INVERT_L = true;
+    public static final boolean DT_INVERT_R = true;
     public static final boolean INTAKE_INVERT = false;
     public static final boolean ARM_INVERT = false;
     public static final boolean EL_INVERT = true;
@@ -59,11 +59,11 @@ public class Constants {
     //Sensor Phase
     public static final boolean DT_LEFT_SENSOR_PHASE = true;
     public static final boolean DT_RIGHT_SENSOR_PHASE = true;
-    public static final boolean ARM_LEFT_SENSOR_PHASE = true;
-    public static final boolean ARM_RIGHT_SENSOR_PHASE = true;
+    public static final boolean ARM_SENSOR_PHASE = false;
     public static final boolean EL_SENSOR_PHASE = true;
 
-    //Ramp Rates
+    //Misc
     public static final double DT_VOLTAGE_RAMP_RATE = 0.1;
+    public static final double ARM_PEAK_OUTPUT = 0.5;
   
 }

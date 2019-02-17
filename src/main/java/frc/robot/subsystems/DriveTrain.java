@@ -35,7 +35,7 @@ public class DriveTrain extends Subsystem {
   private TalonSRX frontLeft = new TalonSRX(RobotMap.DT_FRONT_LEFT);
   private TalonSRX frontRight = new TalonSRX(RobotMap.DT_FRONT_RIGHT);
 
-  private VictorSPX rearLeft = new VictorSPX(RobotMap.DT_REAR_LEFT);
+  private TalonSRX rearLeft = new TalonSRX(RobotMap.DT_REAR_LEFT);
   private VictorSPX rearRight = new VictorSPX(RobotMap.DT_REAR_RIGHT);
 
   private ProfileRecorder recorder = new ProfileRecorder(frontLeft, frontRight, RecordingType.VOLTAGE);

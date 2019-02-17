@@ -24,7 +24,7 @@ public class Intake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private TalonSRX leftIntake = new TalonSRX(RobotMap.INTAKE_LEFT);
+  private VictorSPX leftIntake = new VictorSPX(RobotMap.INTAKE_LEFT);
   private VictorSPX rightIntake = new VictorSPX(RobotMap.INTAKE_RIGHT);
 
   @Override
@@ -41,9 +41,6 @@ public class Intake extends Subsystem {
 
     leftIntake.enableVoltageCompensation(Constants.INTAKE_VOLTAGE_LIMIT_ENABLED);
     rightIntake.enableVoltageCompensation(Constants.INTAKE_VOLTAGE_LIMIT_ENABLED);
-
-    leftIntake.configContinuousCurrentLimit(Constants.INTAKE_CURRENT_LIMIT, Constants.INTAKE_TIMEOUT);
-    leftIntake.enableCurrentLimit(Constants.INTAKE_CURRENT_LIMIT_ENABLED);
 
     rightIntake.follow(leftIntake);
   }

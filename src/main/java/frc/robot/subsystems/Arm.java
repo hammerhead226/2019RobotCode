@@ -8,11 +8,13 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.commands.A_DriveArm;
@@ -24,8 +26,9 @@ public class Arm extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private TalonSRX left = new TalonSRX(RobotMap.ARM_LEFT);
-  private TalonSRX right = new TalonSRX(RobotMap.ARM_RIGHT);
+  private TalonSRX main = new TalonSRX(RobotMap.ARM_MAIN);
+  private VictorSPX follower = new VictorSPX(RobotMap.ARM_FOLLOWER);
+  private int setpointPosition = ArmSetpoint.STRAIGHT_UP.position;
 
   @Override
   public void initDefaultCommand() {
@@ -33,26 +36,66 @@ public class Arm extends Subsystem {
     setDefaultCommand(new A_DriveArm());
   }
 
-  public Arm(){
-    right.follow(left);
+  public void log(){
+    SmartDashboard.putNumber("arm setpoint", setpointPosition);
+    SmartDashboard.putNumber("arm relative position", main.getSelectedSensorPosition());
+    SmartDashboard.putNumber("arm absolute position", main.getSensorCollection().getPulseWidthPosition());
+    SmartDashboard.putNumber("target", main.getClosedLoopTarget());
+    SmartDashboard.putNumber("error", main.getClosedLoopError());
+  }
 
-    left.setInverted(Constants.ARM_INVERT);
-    right.setInverted(InvertType.FollowMaster);
+  public Arm() {
+    follower.follow(main);
 
-    left.setSensorPhase(Constants.ARM_LEFT_SENSOR_PHASE);
-    right.setSensorPhase(Constants.ARM_RIGHT_SENSOR_PHASE);
+    main.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    main.setSensorPhase(Constants.ARM_SENSOR_PHASE);
 
-    left.configVoltageCompSaturation(Constants.ARM_VOLTAGE_LIMIT, Constants.ARM_TIMEOUT);
-    right.configVoltageCompSaturation(Constants.ARM_VOLTAGE_LIMIT, Constants.ARM_TIMEOUT);
+    main.setInverted(Constants.ARM_INVERT);
+    follower.setInverted(InvertType.OpposeMaster);
 
-    left.enableVoltageCompensation(Constants.ARM_VOLTAGE_LIMIT_ENABLED);
-    right.enableVoltageCompensation(Constants.ARM_VOLTAGE_LIMIT_ENABLED);
+    main.configVoltageCompSaturation(Constants.ARM_VOLTAGE_LIMIT, Constants.ARM_TIMEOUT);
+    follower.configVoltageCompSaturation(Constants.ARM_VOLTAGE_LIMIT, Constants.ARM_TIMEOUT);
 
-    left.configContinuousCurrentLimit(Constants.ARM_CURRENT_LIMIT, Constants.ARM_TIMEOUT);
-    left.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);
+    main.enableVoltageCompensation(Constants.ARM_VOLTAGE_LIMIT_ENABLED);
+    follower.enableVoltageCompensation(Constants.ARM_VOLTAGE_LIMIT_ENABLED);
+
+    main.configPeakOutputForward(Constants.ARM_PEAK_OUTPUT);
+    main.configPeakOutputReverse(-Constants.ARM_PEAK_OUTPUT);
+    follower.configPeakOutputForward(Constants.ARM_PEAK_OUTPUT);
+    follower.configPeakOutputReverse(-Constants.ARM_PEAK_OUTPUT);
+
+    main.configContinuousCurrentLimit(Constants.ARM_CURRENT_LIMIT, Constants.ARM_TIMEOUT);
+    main.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);
+  }
+
+  public enum ArmSetpoint {
+    GROUND(0), BALL_INTAKE(352), STRAIGHT_UP(1300), HATCH_SCORING(1540);
+    public int position;
+
+    private ArmSetpoint(int position) {
+      this.position = position;
+    }
+  }
+
+  public void setArmSetpoint(ArmSetpoint sp) {
+    this.setpointPosition = sp.position;
+  }
+
+  public int getArmPos() {
+    return main.getSelectedSensorPosition();
+  }
+
+  public void zeroEncoder() {
+    main.setSelectedSensorPosition(0);
+    setpointPosition = 0;
   }
 
   public void driveArm(double speed) {
-    left.set(ControlMode.PercentOutput, speed);
+    if (speed != 0) {
+      main.set(ControlMode.PercentOutput, speed);
+      setpointPosition = getArmPos();
+    } else {
+      main.set(ControlMode.Position, setpointPosition);
+    }
   }
 }

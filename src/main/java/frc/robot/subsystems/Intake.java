@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -39,7 +38,6 @@ public class Intake extends Subsystem {
     ShuffleboardTab intake = Shuffleboard.getTab("intake");
     Shuffleboard.selectTab("intake");
     intake.add("arm position", leftIntake.getSelectedSensorPosition()).withSize(4, 4).withPosition(0, 0);
-    intake.add("left motor current", leftIntake.getOutputCurrent()).withSize(4, 4).withPosition(0, 4);
   }
 
   public Intake(){

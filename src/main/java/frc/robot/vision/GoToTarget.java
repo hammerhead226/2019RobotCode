@@ -21,14 +21,13 @@ public class GoToTarget extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        initialHeading = Robot.driveTrain.getYaw();
-        setpoint = initialHeading + Limelight.getTargetAngle();
         area = Limelight.getContourArea();
         isTarget = Limelight.contourFound();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        setpoint = Limelight.getTargetAngle();
         System.out.println(isTarget);
         if (isTarget) {
             Robot.driveTrain.tankDrive(setpoint/100, setpoint/100);

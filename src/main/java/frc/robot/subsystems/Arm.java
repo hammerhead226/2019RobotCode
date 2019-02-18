@@ -38,10 +38,10 @@ public class Arm extends Subsystem {
   }
 
   public void log(){
-    ShuffleboardTab arm = Shuffleboard.getTab("arm");
-    Shuffleboard.selectTab("arm");
-    arm.add("arm position", main.getSelectedSensorPosition()).withSize(4,4).withPosition(0,0);
-    arm.add("left motor current", main.getOutputCurrent()).withSize(4,4).withPosition(4,0);
+    ShuffleboardTab arm = Shuffleboard.getTab("Arm");
+    Shuffleboard.selectTab("Arm");
+    arm.add("Arm Position", main.getSelectedSensorPosition()).withSize(4,4).withPosition(0,0);
+    arm.add("Main Motor Current", main.getOutputCurrent()).withSize(4,4).withPosition(4,0);
   }
 
   public Arm() {

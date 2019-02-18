@@ -49,12 +49,12 @@ public class DriveTrain extends Subsystem {
   }
 
   public void log(){
-    ShuffleboardTab drivetrain = Shuffleboard.getTab("drive train");
-    Shuffleboard.selectTab("drive train");
-    drivetrain.add("frontLeft motor position", frontLeft.getSelectedSensorPosition()).withSize(4,4).withPosition(0,0);
-    drivetrain.add("frontLeft motor current", frontLeft.getOutputCurrent()).withSize(4,4).withPosition(0, 4);
-    drivetrain.add("frontRight motor position", frontLeft.getSelectedSensorPosition()).withSize(4,4).withPosition(4, 0);
-    drivetrain.add("frontRight motor current", frontLeft.getOutputCurrent()).withSize(4,4).withPosition(4, 4);
+    ShuffleboardTab drivetrain = Shuffleboard.getTab("Drive Train");
+    Shuffleboard.selectTab("Drive Train");
+    drivetrain.add("frontLeft Motor Position", frontLeft.getSelectedSensorPosition()).withSize(4,4).withPosition(0,0);
+    drivetrain.add("frontLeft Motor Current", frontLeft.getOutputCurrent()).withSize(4,4).withPosition(0, 4);
+    drivetrain.add("frontRight Motor Position", frontLeft.getSelectedSensorPosition()).withSize(4,4).withPosition(4, 0);
+    drivetrain.add("frontRight Motor Current", frontLeft.getOutputCurrent()).withSize(4,4).withPosition(4, 4);
   }
 
   public DriveTrain() {

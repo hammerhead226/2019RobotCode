@@ -41,10 +41,10 @@ public class Elevator extends Subsystem {
   }
 
   public void log(){
-    ShuffleboardTab elevator = Shuffleboard.getTab("elevator");
-    Shuffleboard.selectTab("elevator");
-    elevator.add("arm position", one.getSelectedSensorPosition()).withSize(4, 4).withPosition(0, 0);
-    elevator.add("left motor current", one.getOutputCurrent()).withSize(4,4).withPosition(0,4);
+    ShuffleboardTab elevator = Shuffleboard.getTab("Elevator");
+    Shuffleboard.selectTab("Elevator");
+    elevator.add("Arm Position", one.getSelectedSensorPosition()).withSize(4, 4).withPosition(0, 0);
+    elevator.add("Left Motor Current", one.getOutputCurrent()).withSize(4,4).withPosition(0,4);
   }
   
   public Elevator(){

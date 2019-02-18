@@ -35,9 +35,9 @@ public class Intake extends Subsystem {
   }
 
   public void log(){
-    ShuffleboardTab intake = Shuffleboard.getTab("intake");
-    Shuffleboard.selectTab("intake");
-    intake.add("arm position", leftIntake.getSelectedSensorPosition()).withSize(4, 4).withPosition(0, 0);
+    ShuffleboardTab intake = Shuffleboard.getTab("Intake");
+    Shuffleboard.selectTab("Intake");
+    intake.add("Arm Position", leftIntake.getSelectedSensorPosition()).withSize(4, 4).withPosition(0, 0);
   }
 
   public Intake(){

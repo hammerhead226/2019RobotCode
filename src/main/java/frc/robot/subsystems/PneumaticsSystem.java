@@ -20,6 +20,11 @@ public class PneumaticsSystem extends Subsystem {
   // here. Call these from Commands.
 
   public Compressor compressor = new Compressor();
+  public enum State {
+    ON, OFF
+  };
+
+  private State compressorState = State.ON;
 
   public PneumaticsSystem() {
     compressorOn();
@@ -31,6 +36,16 @@ public class PneumaticsSystem extends Subsystem {
 
   public void compressorOff() {
     compressor.stop();
+  }
+
+  public void toggleCompressor() {
+    if(compressorState == State.ON){
+      compressorOff();
+      compressorState = State.OFF;
+    } else {
+      compressorOn();
+      compressorState = State.ON;
+    }
   }
 
   @Override

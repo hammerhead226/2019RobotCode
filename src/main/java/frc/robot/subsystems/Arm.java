@@ -48,6 +48,9 @@ public class Arm extends Subsystem {
     follower.follow(main);
 
     main.config_kP(Constants.ARM_PIDSLOT_IDX, Constants.ARM_P);
+
+    main.configForwardSoftLimitEnable(Constants.ARM_SOFT_LIMIT_ENABLED);
+    main.configForwardSoftLimitThreshold(Constants.ARM_SOFT_LIMIT);
     
     main.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     main.setSensorPhase(Constants.ARM_SENSOR_PHASE);

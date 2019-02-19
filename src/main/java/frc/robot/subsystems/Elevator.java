@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.*;
 import frc.robot.*;
@@ -36,6 +37,10 @@ public class Elevator extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new EL_Drive());
+  }
+
+  public void log(){
+    SmartDashboard.putNumber("elevator current",one.getOutputCurrent());
   }
 
   public Elevator(){

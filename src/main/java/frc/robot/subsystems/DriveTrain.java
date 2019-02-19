@@ -22,6 +22,8 @@ import org.hammerhead226.sharkmacro.motionprofiles.ProfileRecorder.RecordingType
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
@@ -40,7 +42,7 @@ public class DriveTrain extends Subsystem {
   private TalonSRX rearLeft = new TalonSRX(RobotMap.DT_REAR_LEFT);
   private VictorSPX rearRight = new VictorSPX(RobotMap.DT_REAR_RIGHT);
 
-  private PigeonIMU pigeon = new PigeonIMU(RobotMap.PIGEON);
+  private PigeonIMU pigeon = new PigeonIMU(rearLeft);
 
   private ProfileRecorder recorder = new ProfileRecorder(frontLeft, frontRight, RecordingType.VOLTAGE);
 
@@ -48,6 +50,14 @@ public class DriveTrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new DT_CheesyDrive());
+  }
+
+  public void log(){
+    ShuffleboardTab drivetrain = Shuffleboard.getTab("Drive Train");
+    drivetrain.add("frontLeft Motor Position", frontLeft.getSelectedSensorPosition()).withSize(4,4).withPosition(0,0);
+    drivetrain.add("frontLeft Motor Current", frontLeft.getOutputCurrent()).withSize(4,4).withPosition(0, 4);
+    drivetrain.add("frontRight Motor Position", frontLeft.getSelectedSensorPosition()).withSize(4,4).withPosition(4, 0);
+    drivetrain.add("frontRight Motor Current", frontLeft.getOutputCurrent()).withSize(4,4).withPosition(4, 4);
   }
 
   public DriveTrain() {

@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.RobotMap;
 
 /**
@@ -45,6 +47,14 @@ public class PneumaticsSystem extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+  }
+
+  public void log() {
+    ShuffleboardTab pneumatics_system = Shuffleboard.getTab("Pneumatics System");
+    pneumatics_system.add("Compressor State", compressor.enabled());
+    pneumatics_system.add("leftIntake DoubleSolenoid State", leftIntake);
+    pneumatics_system.add("rightIntake DoubleSolenoid State", rightIntake);
+    pneumatics_system.add("arm DoubleSolenoid State", arm);
   }
 
   private DoubleSolenoid leftIntake = new DoubleSolenoid(RobotMap.INTAKE_LEFT_SHIFTER_1,

@@ -39,9 +39,8 @@ public class Robot extends TimedRobot {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   public void log(){
-    ShuffleboardTab visionTab = Shuffleboard.getTab("visionTab");
-    Shuffleboard.selectTab("visionTab");
-    visionTab.add("arm position", arm.getArmPos()).withSize(4, 4).withPosition(12, 0);
+    ShuffleboardTab Match = Shuffleboard.getTab("Match");
+    Match.add("arm position", arm.getArmPos()).withSize(4, 4).withPosition(12, 0);
     //visionTab.add("limelight vision", video);
     //visionTab.add("toggle compressor command", pneumaticsSystem.compressorOn());
     

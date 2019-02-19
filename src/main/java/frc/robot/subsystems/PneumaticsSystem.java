@@ -33,6 +33,14 @@ public class PneumaticsSystem extends Subsystem {
     compressor.stop();
   }
 
+  public void toggleCompressor() {
+    if(compressor.enabled()){
+      compressorOff();
+    } else {
+      compressorOn();
+    }
+  }
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

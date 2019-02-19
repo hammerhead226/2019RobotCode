@@ -40,7 +40,7 @@ public class DriveTrain extends Subsystem {
   private TalonSRX rearLeft = new TalonSRX(RobotMap.DT_REAR_LEFT);
   private VictorSPX rearRight = new VictorSPX(RobotMap.DT_REAR_RIGHT);
 
-  private PigeonIMU pigeon = new PigeonIMU(RobotMap.PIGEON);
+  private PigeonIMU pigeon = new PigeonIMU(rearLeft);
 
   private ProfileRecorder recorder = new ProfileRecorder(frontLeft, frontRight, RecordingType.VOLTAGE);
 

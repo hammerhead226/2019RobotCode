@@ -10,12 +10,12 @@ package frc.robot;
 import frc.robot.commands.A_SetpointBall;
 import frc.robot.commands.A_SetpointGround;
 import frc.robot.commands.A_SetpointHatch;
-import frc.robot.commands.A_SetpointHigh;
 import frc.robot.commands.A_ZeroEncoder;
 import frc.robot.commands.PS_CompressorOff;
 import frc.robot.commands.PS_CompressorOn;
 import frc.robot.commands.PS_ShiftArm;
 import frc.robot.commands.PS_ShiftIntake;
+import frc.robot.commands.PS_ToggleCompressor;
 import frc.robot.vision.GoToTarget;
 import frc.robot.vision.ToggleCameraSetting;
 import util.Controller;
@@ -30,8 +30,7 @@ public class OI {
   public Controller manip = new Controller(1);
 
   public OI(){
-    driver.getXButton().whenPressed(new PS_CompressorOff());
-    driver.getYButton().whenPressed(new PS_CompressorOn());
+    driver.getXButton().whenPressed(new PS_ToggleCompressor());
 
     driver.getSTARTButton().whenPressed(new ToggleCameraSetting());
     driver.getAButton().whenPressed(new GoToTarget());

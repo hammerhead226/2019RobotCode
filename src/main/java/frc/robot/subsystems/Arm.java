@@ -76,7 +76,7 @@ public class Arm extends Subsystem {
   }
 
   public enum ArmSetpoint {
-    GROUND(0), BALL_INTAKE(155), HATCH_SCORING(270), STRAIGHT_UP(1300);
+    GROUND(0), BALL_INTAKE(155), HATCH_SCORING(260), STRAIGHT_UP(1300);
     public int position;
 
     private ArmSetpoint(int position) {

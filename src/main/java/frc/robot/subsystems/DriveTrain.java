@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 
 import org.hammerhead226.sharkmacro.actions.ActionListParser;
 import org.hammerhead226.sharkmacro.actions.ActionRecorder;
@@ -23,6 +24,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.commands.DT_CheesyDrive;
@@ -39,6 +41,8 @@ public class DriveTrain extends Subsystem {
 
   private TalonSRX rearLeft = new TalonSRX(RobotMap.DT_REAR_LEFT);
   private VictorSPX rearRight = new VictorSPX(RobotMap.DT_REAR_RIGHT);
+
+  private PigeonIMU pigeon = new PigeonIMU(rearLeft);
 
   private ProfileRecorder recorder = new ProfileRecorder(frontLeft, frontRight, RecordingType.VOLTAGE);
 
@@ -129,6 +133,11 @@ public class DriveTrain extends Subsystem {
     return value;
   }
 
+  public void tankDrive(double left, double right){
+    frontLeft.set(ControlMode.PercentOutput,left);
+    frontRight.set(ControlMode.PercentOutput, right);
+  }
+
   public void cheesyDrive(double xSpeed, double zRotation) {
 
     xSpeed = limit(xSpeed);
@@ -171,9 +180,20 @@ public class DriveTrain extends Subsystem {
     return new TalonSRX[] { frontLeft, frontRight };
   }
 
-  private void zeroEncoders() {
+  public double getYaw(){
+    double[] vals = new double[3];
+    pigeon.getYawPitchRoll(vals);
+    return vals[0];
+  }
+
+  public void zeroEncoders() {
     frontLeft.setSelectedSensorPosition(0, 0, 0);
     frontRight.setSelectedSensorPosition(0, 0, 0);
     System.out.println("Drivetrain encoders zeroed.");
+  }
+
+  public void zeroYaw(){
+    pigeon.setYaw(0);
+    pigeon.setFusedHeading(0);
   }
 }

@@ -72,9 +72,11 @@ public class Elevator extends Subsystem {
     roller.enableVoltageCompensation(Constants.EL_VOLTAGE_LIMIT_ENABLED);
 
     one.configContinuousCurrentLimit(Constants.EL_CURRENT_LIMIT, Constants.EL_TIMEOUT);
+    two.configContinuousCurrentLimit(Constants.EL_CURRENT_LIMIT, Constants.EL_TIMEOUT);
     roller.configContinuousCurrentLimit(Constants.EL_CURRENT_LIMIT, Constants.EL_TIMEOUT);
 
     one.enableCurrentLimit(Constants.EL_CURRENT_LIMIT_ENABLED);
+    two.enableCurrentLimit(Constants.EL_CURRENT_LIMIT_ENABLED);
     roller.enableCurrentLimit(Constants.EL_CURRENT_LIMIT_ENABLED);
 
   }

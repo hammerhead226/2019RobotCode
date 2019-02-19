@@ -18,7 +18,7 @@ public class Constants {
     public static final boolean INTAKE_INVERT = false;
     public static final boolean ARM_INVERT = false;
     public static final boolean EL_INVERT = true;
-    public static final boolean EL_INVERT_ROLLER = false;
+    public static final boolean EL_INVERT_ROLLER = true;
 
 
     //Voltage Limits
@@ -37,17 +37,16 @@ public class Constants {
     public static final int INTAKE_CURRENT_LIMIT = 30;
     public static final boolean INTAKE_CURRENT_LIMIT_ENABLED = false;
     public static final int ARM_CURRENT_LIMIT = 30;
-    public static final boolean ARM_CURRENT_LIMIT_ENABLED = false;
+    public static final boolean ARM_CURRENT_LIMIT_ENABLED = true;
     public static final int EL_CURRENT_LIMIT = 30;
-    public static final boolean EL_CURRENT_LIMIT_ENABLED = false;
+    public static final boolean EL_CURRENT_LIMIT_ENABLED = true;
 
     //PID Slots
     public static final int DT_LEFT_PIDSLOT_IDX = 0;
     public static final int DT_RIGHT_PIDSLOT_IDX = 0;
     public static final int INTAKE_LEFT_PIDSLOT_IDX = 0;
     public static final int INTAKE_RIGHT_PIDSLOT_IDX = 0;
-    public static final int ARM_LEFT_PIDSLOT_IDX = 0;
-    public static final int ARM_RIGHT_PIDSLOT_IDX = 0;
+    public static final int ARM_PIDSLOT_IDX = 0;
     public static final int EL_PIDSLOT_IDX = 0;
 
     //Timeouts
@@ -59,11 +58,12 @@ public class Constants {
     //Sensor Phase
     public static final boolean DT_LEFT_SENSOR_PHASE = true;
     public static final boolean DT_RIGHT_SENSOR_PHASE = true;
-    public static final boolean ARM_SENSOR_PHASE = false;
+    public static final boolean ARM_SENSOR_PHASE = true;
     public static final boolean EL_SENSOR_PHASE = true;
 
     //Misc
     public static final double DT_VOLTAGE_RAMP_RATE = 0.1;
     public static final double ARM_PEAK_OUTPUT = 0.5;
+    public static final double ARM_P = 1.75;
   
 }

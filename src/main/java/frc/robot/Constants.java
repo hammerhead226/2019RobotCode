@@ -20,7 +20,6 @@ public class Constants {
     public static final boolean EL_INVERT = true;
     public static final boolean EL_INVERT_ROLLER = true;
 
-
     //Voltage Limits
     public static final double DT_VOLTAGE_LIMIT = 11;
     public static final boolean DT_VOLTAGE_LIMIT_ENABLED = true;
@@ -65,9 +64,11 @@ public class Constants {
     public static final boolean ARM_SOFT_LIMIT_ENABLED = true;
     public static final int ARM_SOFT_LIMIT = 1200;
 
+    //PID
+    public static final double ARM_P = 1.75;
+
     //Misc
     public static final double DT_VOLTAGE_RAMP_RATE = 0.15;
     public static final double ARM_PEAK_OUTPUT = 0.5;
-    public static final double ARM_P = 1.75;
-  
+ 
 }

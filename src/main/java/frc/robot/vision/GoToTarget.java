@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
 /**
@@ -42,7 +43,7 @@ public class GoToTarget extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-       return setpoint <= 0.5 && setpoint >= -0.5;
+       return setpoint <= Constants.VISION_TOLERANCE && setpoint >= -Constants.VISION_TOLERANCE;
     }
 
     // Called once after isFinished returns true

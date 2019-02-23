@@ -63,10 +63,10 @@ public class Constants {
 
     //Arm Soft Limits
     public static final boolean ARM_SOFT_LIMIT_ENABLED = true;
-    public static final int ARM_SOFT_LIMIT = 1300;
+    public static final int ARM_SOFT_LIMIT = 1200;
 
     //Misc
-    public static final double DT_VOLTAGE_RAMP_RATE = 0.1;
+    public static final double DT_VOLTAGE_RAMP_RATE = 0.15;
     public static final double ARM_PEAK_OUTPUT = 0.5;
     public static final double ARM_P = 1.75;
   

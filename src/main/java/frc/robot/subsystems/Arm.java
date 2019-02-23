@@ -76,7 +76,7 @@ public class Arm extends Subsystem {
   }
 
   public enum ArmSetpoint {
-    GROUND(0), BALL_INTAKE(155), HATCH_SCORING(260), STRAIGHT_UP(1300);
+    GROUND(0), BALL_INTAKE(165), HATCH_SCORING(369), STRAIGHT_UP(1100);
     public int position;
 
     private ArmSetpoint(int position) {
@@ -98,8 +98,8 @@ public class Arm extends Subsystem {
   }
 
   public void driveArm(double speed) {
-    if (speed != 0) {
-      main.set(ControlMode.PercentOutput, speed);
+     if (speed != 0) {
+       main.set(ControlMode.PercentOutput, speed);
       setpointPosition = getArmPos();
     } else {
       main.set(ControlMode.Position, setpointPosition);

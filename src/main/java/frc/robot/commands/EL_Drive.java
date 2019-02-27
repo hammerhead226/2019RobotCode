@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class EL_Drive extends Command {
+
+  private boolean climbing = false;
+
   public EL_Drive() {
     requires(Robot.elevator);
   }
@@ -19,12 +22,23 @@ public class EL_Drive extends Command {
   @Override
   protected void initialize() {
     Robot.elevator.drive(0);
+    Robot.elevator.driveRoller(0);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.elevator.drive(Robot.m_oi.manip.getLeftJoystick_Y());
+    Robot.elevator.drive(Robot.m_oi.driver.getTriggers());
+
+    if(Robot.m_oi.driver.getBButtonPressed(0.25)){
+      climbing = !climbing;
+    }
+
+    if(climbing){
+    Robot.elevator.driveRoller(Robot.m_oi.driver.getLeftJoystick_Y());
+    }else{
+      Robot.elevator.driveRoller(0);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

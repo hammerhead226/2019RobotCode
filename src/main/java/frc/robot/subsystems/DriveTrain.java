@@ -22,7 +22,6 @@ import org.hammerhead226.sharkmacro.motionprofiles.ProfileRecorder.RecordingType
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.commands.DT_CheesyDrive;
@@ -40,7 +39,7 @@ public class DriveTrain extends Subsystem {
   private TalonSRX rearLeft = new TalonSRX(RobotMap.DT_REAR_LEFT);
   private VictorSPX rearRight = new VictorSPX(RobotMap.DT_REAR_RIGHT);
 
-  private PigeonIMU pigeon = new PigeonIMU(RobotMap.PIGEON);
+  private PigeonIMU pigeon = new PigeonIMU(rearLeft);
 
   private ProfileRecorder recorder = new ProfileRecorder(frontLeft, frontRight, RecordingType.VOLTAGE);
 

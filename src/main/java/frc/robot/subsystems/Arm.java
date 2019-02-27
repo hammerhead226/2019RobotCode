@@ -47,6 +47,11 @@ public class Arm extends Subsystem {
   public Arm() {
     follower.follow(main);
 
+    main.config_kP(Constants.ARM_PIDSLOT_IDX, Constants.ARM_P);
+
+    main.configForwardSoftLimitEnable(Constants.ARM_SOFT_LIMIT_ENABLED);
+    main.configForwardSoftLimitThreshold(Constants.ARM_SOFT_LIMIT);
+    
     main.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     main.setSensorPhase(Constants.ARM_SENSOR_PHASE);
 
@@ -66,10 +71,12 @@ public class Arm extends Subsystem {
 
     main.configContinuousCurrentLimit(Constants.ARM_CURRENT_LIMIT, Constants.ARM_TIMEOUT);
     main.enableCurrentLimit(Constants.ARM_CURRENT_LIMIT_ENABLED);
+
+    main.setSelectedSensorPosition(ArmSetpoint.STRAIGHT_UP.position);
   }
 
   public enum ArmSetpoint {
-    GROUND(0), BALL_INTAKE(352), STRAIGHT_UP(1300), HATCH_SCORING(1540);
+    GROUND(0), BALL_INTAKE(165), HATCH_SCORING(369), STRAIGHT_UP(1100);
     public int position;
 
     private ArmSetpoint(int position) {
@@ -91,8 +98,8 @@ public class Arm extends Subsystem {
   }
 
   public void driveArm(double speed) {
-    if (speed != 0) {
-      main.set(ControlMode.PercentOutput, speed);
+     if (speed != 0) {
+       main.set(ControlMode.PercentOutput, speed);
       setpointPosition = getArmPos();
     } else {
       main.set(ControlMode.Position, setpointPosition);

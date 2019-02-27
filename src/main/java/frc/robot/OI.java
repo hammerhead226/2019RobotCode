@@ -7,15 +7,17 @@
 
 package frc.robot;
 
-import frc.robot.auton.ExecuteMacro;
-import frc.robot.auton.ToggleProfileRecording;
 import frc.robot.commands.A_SetpointBall;
 import frc.robot.commands.A_SetpointGround;
 import frc.robot.commands.A_SetpointHatch;
-import frc.robot.commands.A_SetpointHigh;
 import frc.robot.commands.A_ZeroEncoder;
+import frc.robot.commands.PS_CompressorOff;
+import frc.robot.commands.PS_CompressorOn;
 import frc.robot.commands.PS_ShiftArm;
 import frc.robot.commands.PS_ShiftIntake;
+import frc.robot.commands.PS_ToggleCompressor;
+import frc.robot.vision.GoToTarget;
+import frc.robot.vision.ToggleCameraSetting;
 import util.Controller;
 
 /**
@@ -28,8 +30,10 @@ public class OI {
   public Controller manip = new Controller(1);
 
   public OI(){
-    driver.getSTARTButton().whenPressed(new ToggleProfileRecording());
-    driver.getSELECTButton().whenPressed(new ExecuteMacro());
+    driver.getXButton().whenPressed(new PS_ToggleCompressor());
+
+    driver.getSTARTButton().whenPressed(new ToggleCameraSetting());
+    driver.getAButton().whenPressed(new GoToTarget());
 
     manip.getRBButton().whenPressed(new PS_ShiftArm());
     manip.getLBButton().whenPressed(new PS_ShiftIntake());
@@ -37,9 +41,9 @@ public class OI {
     manip.getSTARTButton().whenPressed(new A_ZeroEncoder());
 
     manip.getAButton().whenPressed(new A_SetpointGround());
-    manip.getBButton().whenPressed(new A_SetpointHatch());
-    manip.getXButton().whenPressed(new A_SetpointBall());
-    manip.getYButton().whenPressed(new A_SetpointHigh());
+    manip.getXButton().whenPressed(new A_SetpointHatch());
+    manip.getBButton().whenPressed(new A_SetpointBall());
+    //manip.getYButton().whenPressed(new A_SetpointHigh());
   }
 
 }

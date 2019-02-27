@@ -38,4 +38,8 @@ public class Limelight {
     public static double getContourArea() {
         return getTable().getEntry("ta").getDouble(0.0);
     }
+
+    public static double sigmoid(double x){
+        return  (1/(1+Math.pow(Math.E, -x))) - 0.5;
+    }
 }

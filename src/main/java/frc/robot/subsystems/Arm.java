@@ -97,6 +97,11 @@ public class Arm extends Subsystem {
     setpointPosition = 0;
   }
 
+  public void encoderUp(){
+    main.setSelectedSensorPosition(ArmSetpoint.STRAIGHT_UP.position);
+    setpointPosition = ArmSetpoint.STRAIGHT_UP.position;
+  }
+
   public void driveArm(double speed) {
      if (speed != 0) {
        main.set(ControlMode.PercentOutput, speed);

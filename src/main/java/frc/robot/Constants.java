@@ -70,7 +70,7 @@ public class Constants {
     public static final double ARM_P = 1.75;
 
     //Misc
-    public static final double DT_VOLTAGE_RAMP_RATE = 0.15;
+    public static final double DT_VOLTAGE_RAMP_RATE = 0.1;
     public static final double ARM_PEAK_OUTPUT = 0.5;
     public static final double VISION_TOLERANCE = 0.5;
  

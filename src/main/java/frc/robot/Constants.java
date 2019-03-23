@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import frc.robot.subsystems.Arm.ArmSetpoint;
+
 /**
  * Add your docs here.
  */
@@ -62,7 +64,7 @@ public class Constants {
 
     //Arm Soft Limits
     public static final boolean ARM_SOFT_LIMIT_ENABLED = true;
-    public static final int ARM_SOFT_LIMIT = 1200;
+    public static final int ARM_SOFT_LIMIT = ArmSetpoint.STRAIGHT_UP.position + 100;
 
     //PID
     public static final double ARM_P = 1.75;

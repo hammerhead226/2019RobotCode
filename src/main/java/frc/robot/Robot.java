@@ -19,6 +19,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.PneumaticsSystem;
+import frc.robot.vision.Limelight;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -99,6 +100,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = chooser.getSelected();
+    Limelight.driverSetting();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");

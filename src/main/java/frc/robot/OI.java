@@ -7,12 +7,11 @@
 
 package frc.robot;
 
+import frc.robot.commands.A_SetEncoderUp;
 import frc.robot.commands.A_SetpointBall;
-import frc.robot.commands.A_SetpointGround;
 import frc.robot.commands.A_SetpointHatch;
+import frc.robot.commands.A_SetpointRocket;
 import frc.robot.commands.A_ZeroEncoder;
-import frc.robot.commands.PS_CompressorOff;
-import frc.robot.commands.PS_CompressorOn;
 import frc.robot.commands.PS_ShiftArm;
 import frc.robot.commands.PS_ShiftIntake;
 import frc.robot.commands.PS_ToggleCompressor;
@@ -39,10 +38,11 @@ public class OI {
     manip.getLBButton().whenPressed(new PS_ShiftIntake());
 
     manip.getSTARTButton().whenPressed(new A_ZeroEncoder());
+    manip.getYButton().whenPressed(new A_SetEncoderUp());
 
-    manip.getAButton().whenPressed(new A_SetpointGround());
-    manip.getXButton().whenPressed(new A_SetpointHatch());
-    manip.getBButton().whenPressed(new A_SetpointBall());
+    manip.getXButton().whenPressed(new A_SetpointRocket());
+    manip.getBButton().whenPressed(new A_SetpointHatch());
+    manip.getAButton().whenPressed(new A_SetpointBall());
     //manip.getYButton().whenPressed(new A_SetpointHigh());
   }
 

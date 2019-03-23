@@ -27,6 +27,11 @@ public class Limelight {
         }
     }
 
+    public static void driverSetting(){
+        getTable().getEntry("camMode").setNumber(1);
+        getTable().getEntry("ledMode").setNumber(1);
+    }
+
     public static double getTargetAngle() {
         return getTable().getEntry("tx").getDouble(0.0);
     }

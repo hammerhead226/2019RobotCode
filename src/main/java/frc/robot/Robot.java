@@ -12,11 +12,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.PS_ShiftIntake;
+import frc.robot.commands.Wait;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.PneumaticsSystem;
+import frc.robot.vision.Limelight;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,7 +37,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   
   Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+  SendableChooser<Command> chooser = new SendableChooser<>();
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -49,8 +52,9 @@ public class Robot extends TimedRobot {
     pneumaticsSystem = new PneumaticsSystem();
     m_oi = new OI();
     // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    // chooser.addOption("Vision Driving", null);
+    // chooser.addOption("Do Nothing", new Wait(15));
+    SmartDashboard.putData("Auto mode", chooser);  
   }
 
   /**
@@ -95,7 +99,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    m_autonomousCommand = chooser.getSelected();
+    Limelight.driverSetting();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");

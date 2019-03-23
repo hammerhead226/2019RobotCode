@@ -38,8 +38,8 @@ public class Arm extends Subsystem {
 
   public void log(){
     SmartDashboard.putNumber("arm setpoint", setpointPosition);
-    SmartDashboard.putNumber("arm relative position", main.getSelectedSensorPosition());
-    SmartDashboard.putNumber("arm absolute position", main.getSensorCollection().getPulseWidthPosition());
+    SmartDashboard.putNumber("arm absolute position", main.getSelectedSensorPosition());
+    //SmartDashboard.putNumber("arm absolute position", main.getSensorCollection().getPulseWidthPosition());
     SmartDashboard.putNumber("target", main.getClosedLoopTarget());
     SmartDashboard.putNumber("error", main.getClosedLoopError());
   }
@@ -76,7 +76,7 @@ public class Arm extends Subsystem {
   }
 
   public enum ArmSetpoint {
-    GROUND(0), BALL_INTAKE(165), HATCH_SCORING(369), STRAIGHT_UP(1100);
+    GROUND(0),BALL_INTAKE(20), ROCKET_CARGO(170), HATCH_SCORING(445),  STRAIGHT_UP(1170);
     public int position;
 
     private ArmSetpoint(int position) {
@@ -95,6 +95,11 @@ public class Arm extends Subsystem {
   public void zeroEncoder() {
     main.setSelectedSensorPosition(0);
     setpointPosition = 0;
+  }
+
+  public void encoderUp(){
+    main.setSelectedSensorPosition(ArmSetpoint.STRAIGHT_UP.position);
+    setpointPosition = ArmSetpoint.STRAIGHT_UP.position;
   }
 
   public void driveArm(double speed) {

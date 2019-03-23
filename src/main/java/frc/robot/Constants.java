@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import frc.robot.subsystems.Arm.ArmSetpoint;
 
 /**
@@ -73,5 +75,6 @@ public class Constants {
     public static final double DT_VOLTAGE_RAMP_RATE = 0.1;
     public static final double ARM_PEAK_OUTPUT = 0.5;
     public static final double VISION_TOLERANCE = 0.5;
+    public static final NeutralMode DT_NEUTRAL_MODE = NeutralMode.Brake;
  
 }

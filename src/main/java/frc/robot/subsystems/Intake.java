@@ -49,7 +49,7 @@ public class Intake extends Subsystem {
       rightIntake.set(ControlMode.PercentOutput, 0);
     } else {
       leftIntake.set(ControlMode.PercentOutput, speed);
-      rightIntake.set(ControlMode.PercentOutput, -speed);
+      rightIntake.set(ControlMode.PercentOutput, speed);
     }
   }
 }

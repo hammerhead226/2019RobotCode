@@ -33,7 +33,7 @@ public class Intake extends Subsystem {
   }
   public Intake(){
     leftIntake.setInverted(Constants.INTAKE_INVERT);
-    rightIntake.setInverted(InvertType.OpposeMaster);
+    rightIntake.setInverted(!Constants.INTAKE_INVERT);
 
     leftIntake.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_LIMIT, Constants.INTAKE_TIMEOUT);
     rightIntake.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_LIMIT, Constants.INTAKE_TIMEOUT);
@@ -41,10 +41,16 @@ public class Intake extends Subsystem {
     leftIntake.enableVoltageCompensation(Constants.INTAKE_VOLTAGE_LIMIT_ENABLED);
     rightIntake.enableVoltageCompensation(Constants.INTAKE_VOLTAGE_LIMIT_ENABLED);
 
-    rightIntake.follow(leftIntake);
+    //rightIntake.follow(leftIntake);
   }
   public void driveIntake(double speed) {
-    leftIntake.set(ControlMode.PercentOutput, speed);
+    if(speed == 0) {
+      leftIntake.set(ControlMode.PercentOutput, 0);
+      rightIntake.set(ControlMode.PercentOutput, 0);
+    } else {
+      leftIntake.set(ControlMode.PercentOutput, speed);
+      rightIntake.set(ControlMode.PercentOutput, -speed);
+    }
   }
 }
 

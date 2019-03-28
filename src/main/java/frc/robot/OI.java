@@ -40,8 +40,8 @@ public class OI {
     manip.getSTARTButton().whenPressed(new A_ZeroEncoder());
     manip.getYButton().whenPressed(new A_SetEncoderUp());
 
-    manip.getXButton().whenPressed(new A_SetpointRocket());
-    manip.getBButton().whenPressed(new A_SetpointHatch());
+    manip.getXButton().whenPressed(new A_SetpointHatch());
+    manip.getBButton().whenPressed(new A_SetpointRocket());
     manip.getAButton().whenPressed(new A_SetpointBall());
     //manip.getYButton().whenPressed(new A_SetpointHigh());
   }

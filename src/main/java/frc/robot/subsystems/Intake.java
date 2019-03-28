@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.I_DriveIntake;;
 
@@ -23,28 +24,39 @@ public class Intake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private VictorSPX leftIntake = new VictorSPX(RobotMap.INTAKE_LEFT);
-  private VictorSPX rightIntake = new VictorSPX(RobotMap.INTAKE_RIGHT);
+  private VictorSPX intake = new VictorSPX(RobotMap.INTAKE);
+  private VictorSPX roller = new VictorSPX(RobotMap.INTAKE_ROLLER);
+  boolean rollers = false;
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new I_DriveIntake());
   }
-  public Intake(){
-    leftIntake.setInverted(Constants.INTAKE_INVERT);
-    rightIntake.setInverted(InvertType.OpposeMaster);
 
-    leftIntake.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_LIMIT, Constants.INTAKE_TIMEOUT);
-    rightIntake.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_LIMIT, Constants.INTAKE_TIMEOUT);
+  public Intake() {
+    intake.setInverted(Constants.INTAKE_INVERT);
+    roller.setInverted(InvertType.OpposeMaster);
 
-    leftIntake.enableVoltageCompensation(Constants.INTAKE_VOLTAGE_LIMIT_ENABLED);
-    rightIntake.enableVoltageCompensation(Constants.INTAKE_VOLTAGE_LIMIT_ENABLED);
+    intake.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_LIMIT, Constants.INTAKE_TIMEOUT);
+    roller.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_LIMIT, Constants.INTAKE_TIMEOUT);
 
-    rightIntake.follow(leftIntake);
+    intake.enableVoltageCompensation(Constants.INTAKE_VOLTAGE_LIMIT_ENABLED);
+    roller.enableVoltageCompensation(Constants.INTAKE_VOLTAGE_LIMIT_ENABLED);
   }
+
   public void driveIntake(double speed) {
-    leftIntake.set(ControlMode.PercentOutput, speed);
+    if (Robot.m_oi.manip.getRSButtonPressed(0.25)) {
+      rollers = !rollers;
+    }
+
+    intake.set(ControlMode.PercentOutput, speed);
+
+    if (rollers) {
+      roller.set(ControlMode.PercentOutput, speed);
+    } else {
+      roller.set(ControlMode.PercentOutput, 0);
+    }
+
   }
 }
-

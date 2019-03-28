@@ -19,8 +19,8 @@ public class RobotMap {
   public static int DT_FRONT_RIGHT = 6;
   public static int DT_REAR_RIGHT = 16;
 
-  public static int INTAKE_LEFT = 13;
-  public static int INTAKE_RIGHT = 14;
+  public static int INTAKE = 14;
+  public static int INTAKE_ROLLER = 13;
 
   public static int INTAKE_LEFT_SHIFTER_1 = 2;
   public static int INTAKE_LEFT_SHIFTER_2 = 5;

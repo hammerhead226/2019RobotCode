@@ -165,6 +165,11 @@ public class DriveTrain extends Subsystem {
 
   }
 
+  public void arcadeDrive(double throttle, double turn){
+    frontLeft.set(ControlMode.PercentOutput, throttle-turn);
+    frontRight.set(ControlMode.PercentOutput, throttle + turn);
+  }
+
   public TalonSRX[] getMotionProfileTalons() {
     return new TalonSRX[] { frontLeft, frontRight };
   }

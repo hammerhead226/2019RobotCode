@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.sensors.PigeonIMU;
@@ -52,6 +53,11 @@ public class DriveTrain extends Subsystem {
   public DriveTrain() {
     rearLeft.follow(frontLeft);
     rearRight.follow(frontRight);
+
+    frontLeft.setNeutralMode(Constants.DT_NEUTRAL_MODE);
+    frontRight.setNeutralMode(Constants.DT_NEUTRAL_MODE);
+    rearLeft.setNeutralMode(Constants.DT_NEUTRAL_MODE);
+    rearRight.setNeutralMode(Constants.DT_NEUTRAL_MODE);
 
     frontLeft.setInverted(Constants.DT_INVERT_L);
     rearLeft.setInverted(InvertType.FollowMaster);

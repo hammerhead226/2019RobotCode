@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.PS_ShiftIntake;
+import frc.robot.auton.LevelTwoDrop;
 import frc.robot.commands.Wait;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
@@ -51,10 +51,12 @@ public class Robot extends TimedRobot {
     intake = new Intake();
     pneumaticsSystem = new PneumaticsSystem();
     m_oi = new OI();
-    // m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("Vision Driving", null);
-    // chooser.addOption("Do Nothing", new Wait(15));
+
+    Limelight.driverSetting();
     SmartDashboard.putData("Auto mode", chooser);  
+    chooser.setDefaultOption("Level Two Drop", new LevelTwoDrop(1));
+    chooser.addOption("Driver Control", null);
+    chooser.addOption("Do Nothing", new Wait(15));
   }
 
   /**
@@ -100,7 +102,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = chooser.getSelected();
-    Limelight.driverSetting();
+
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -121,6 +123,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+
   }
 
   @Override

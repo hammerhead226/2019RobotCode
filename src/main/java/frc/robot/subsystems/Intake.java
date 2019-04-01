@@ -36,7 +36,7 @@ public class Intake extends Subsystem {
 
   public Intake() {
     intake.setInverted(Constants.INTAKE_INVERT);
-    roller.setInverted(InvertType.OpposeMaster);
+    roller.setInverted(InvertType.FollowMaster);
 
     intake.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_LIMIT, Constants.INTAKE_TIMEOUT);
     roller.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_LIMIT, Constants.INTAKE_TIMEOUT);

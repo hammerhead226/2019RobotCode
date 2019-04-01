@@ -23,7 +23,7 @@ public class PneumaticsSystem extends Subsystem {
 
   public PneumaticsSystem() {
     compressorOn();
-    rightIntake.set(DoubleSolenoid.Value.kReverse);
+    rightIntake.set(DoubleSolenoid.Value.kForward);
   }
 
   public void compressorOn() {

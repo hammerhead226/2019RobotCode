@@ -46,17 +46,7 @@ public class Intake extends Subsystem {
   }
 
   public void driveIntake(double speed) {
-    if (Robot.m_oi.manip.getRSButtonPressed(0.25)) {
-      rollers = !rollers;
-    }
-
     intake.set(ControlMode.PercentOutput, speed);
-
-    if (rollers) {
-      roller.set(ControlMode.PercentOutput, speed);
-    } else {
-      roller.set(ControlMode.PercentOutput, 0);
-    }
-
+    roller.set(ControlMode.PercentOutput, speed);
   }
 }

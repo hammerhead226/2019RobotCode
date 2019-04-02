@@ -22,10 +22,8 @@ public class RobotMap {
   public static int INTAKE = 14;
   public static int INTAKE_ROLLER = 13;
 
-  public static int INTAKE_LEFT_SHIFTER_1 = 2;
-  public static int INTAKE_LEFT_SHIFTER_2 = 5;
-  public static int INTAKE_RIGHT_SHIFTER_1 = 1;
-  public static int INTAKE_RIGHT_SHIFTER_2 = 6;
+  public static int INTAKE_SHIFTER_1 = 1;
+  public static int INTAKE_SHIFTER_2 = 6;
 
   public static int EL_ONE = 1;
   public static int EL_TWO = 2;

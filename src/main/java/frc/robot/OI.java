@@ -34,7 +34,6 @@ public class OI {
     driver.getSTARTButton().whenPressed(new ToggleCameraSetting());
     driver.getAButton().whenPressed(new GoToTarget());
 
-    manip.getRBButton().whenPressed(new PS_ShiftArm());
     manip.getLBButton().whenPressed(new PS_ShiftIntake());
 
     manip.getSTARTButton().whenPressed(new A_ZeroEncoder());

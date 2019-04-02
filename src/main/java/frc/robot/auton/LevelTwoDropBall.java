@@ -13,14 +13,14 @@ import frc.robot.Robot;
 /**
  * Add your docs here.
  */
-public class LevelTwoDrop extends TimedCommand {
+public class LevelTwoDropBall extends TimedCommand {
   /**
    * Add your docs here.
    */
-  public LevelTwoDrop(double timeout) {
+  public LevelTwoDropBall(double timeout) {
     super(timeout);
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.driveTrain);
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
@@ -37,7 +37,7 @@ public class LevelTwoDrop extends TimedCommand {
   // Called once after timeout
   @Override
   protected void end() {
-    Robot.driveTrain.cheesyDrive(0, 0);
+ //   Robot.driveTrain.cheesyDrive(0, 0);
   }
 
   // Called when another command which requires one or more of the same

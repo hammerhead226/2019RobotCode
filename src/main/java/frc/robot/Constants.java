@@ -19,7 +19,7 @@ public class Constants {
     //Inverts
     public static final boolean DT_INVERT_L = true;
     public static final boolean DT_INVERT_R = true;
-    public static final boolean INTAKE_INVERT = false;
+    public static final boolean INTAKE_INVERT = true;
     public static final boolean ARM_INVERT = false;
     public static final boolean EL_INVERT = true;
     public static final boolean EL_INVERT_ROLLER = true;
@@ -69,7 +69,7 @@ public class Constants {
     public static final int ARM_SOFT_LIMIT = ArmSetpoint.STRAIGHT_UP.position + 100;
 
     //PID
-    public static final double ARM_P = 2.15;
+    public static final double ARM_P = 0.5;
 
     //Misc
     public static final double DT_VOLTAGE_RAMP_RATE = 0.1;

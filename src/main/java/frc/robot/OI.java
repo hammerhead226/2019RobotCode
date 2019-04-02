@@ -10,6 +10,7 @@ package frc.robot;
 import frc.robot.commands.A_SetEncoderUp;
 import frc.robot.commands.A_SetpointBall;
 import frc.robot.commands.A_SetpointHatch;
+import frc.robot.commands.A_SetpointHigh;
 import frc.robot.commands.A_SetpointRocket;
 import frc.robot.commands.A_ZeroEncoder;
 import frc.robot.commands.PS_ShiftArm;
@@ -24,7 +25,6 @@ import util.Controller;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-
   public Controller driver = new Controller(0);
   public Controller manip = new Controller(1);
 
@@ -38,12 +38,12 @@ public class OI {
     manip.getLBButton().whenPressed(new PS_ShiftIntake());
 
     manip.getSTARTButton().whenPressed(new A_ZeroEncoder());
-    manip.getYButton().whenPressed(new A_SetEncoderUp());
+    manip.getRBButton().whenPressed(new A_SetEncoderUp());
 
     manip.getXButton().whenPressed(new A_SetpointHatch());
     manip.getBButton().whenPressed(new A_SetpointRocket());
     manip.getAButton().whenPressed(new A_SetpointBall());
-    //manip.getYButton().whenPressed(new A_SetpointHigh());
+    manip.getYButton().whenPressed(new A_SetpointHigh());
   }
 
 }

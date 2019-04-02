@@ -5,13 +5,22 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.auton;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
-public class DT_CheesyDrive extends Command {
-  public DT_CheesyDrive() {
+/**
+ * Add your docs here.
+ */
+public class LevelTwoDropHatch extends TimedCommand {
+  /**
+   * Add your docs here.
+   */
+  Timer timer = new Timer();
+  public LevelTwoDropHatch(double timeout) {
+    super(timeout);
     // Use requires() here to declare subsystem dependencies
     requires(Robot.driveTrain);
   }
@@ -19,28 +28,31 @@ public class DT_CheesyDrive extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    timer.start();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    Robot.driveTrain.cheesyDrive(0.85 * -Robot.m_oi.driver.getLeftJoystick_Y(), 0.75 * Robot.m_oi.driver.getRightJoystick_X());
+    Robot.intake.driveIntake(-0.5);
+    if(timer.get() <=1.0){
+    Robot.driveTrain.cheesyDrive(0.85, 0);
+    }else{
+      Robot.driveTrain.cheesyDrive(0, 0);
+    }
   }
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
 
-  // Called once after isFinished returns true
+  // Called once after timeout
   @Override
   protected void end() {
+    // Robot.intake.driveIntake(0);
+    // Robot.driveTrain.cheesyDrive(0, 0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.driveTrain.cheesyDrive(0, 0);
   }
 }

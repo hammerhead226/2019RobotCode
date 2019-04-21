@@ -9,24 +9,28 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.I_DriveIntake;;
+import frc.robot.commands.I_DriveIntake;
 
 /**
- * Add your docs here.
+ * Add your docs here
  */
 public class Intake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private VictorSPX intake = new VictorSPX(RobotMap.INTAKE);
+  private TalonSRX intake = new TalonSRX(RobotMap.INTAKE);
   private VictorSPX roller = new VictorSPX(RobotMap.INTAKE_ROLLER);
-  boolean rollers = false;
+
+  public void log(){
+    SmartDashboard.putNumber("intake pull", intake.getMotorOutputPercent());
+  }
 
   @Override
   public void initDefaultCommand() {
@@ -36,7 +40,7 @@ public class Intake extends Subsystem {
 
   public Intake() {
     intake.setInverted(Constants.INTAKE_INVERT);
-    roller.setInverted(InvertType.FollowMaster);
+    roller.setInverted(InvertType.OpposeMaster);
 
     intake.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_LIMIT, Constants.INTAKE_TIMEOUT);
     roller.configVoltageCompSaturation(Constants.INTAKE_VOLTAGE_LIMIT, Constants.INTAKE_TIMEOUT);
@@ -46,7 +50,11 @@ public class Intake extends Subsystem {
   }
 
   public void driveIntake(double speed) {
-    intake.set(ControlMode.PercentOutput, speed);
+    intake.set(ControlMode.PercentOutput, -0.8 * speed);
     roller.set(ControlMode.PercentOutput, speed);
+  }
+
+  public boolean isStalling(){
+    return intake.getOutputCurrent() > 65;
   }
 }

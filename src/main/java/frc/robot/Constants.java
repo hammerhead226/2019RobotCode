@@ -41,7 +41,7 @@ public class Constants {
     public static final boolean INTAKE_CURRENT_LIMIT_ENABLED = false;
     public static final int ARM_CURRENT_LIMIT = 30;
     public static final boolean ARM_CURRENT_LIMIT_ENABLED = true;
-    public static final int EL_CURRENT_LIMIT = 30;
+    public static final int EL_CURRENT_LIMIT = 20;
     public static final boolean EL_CURRENT_LIMIT_ENABLED = true;
 
     //PID Slots
@@ -76,5 +76,4 @@ public class Constants {
     public static final double ARM_PEAK_OUTPUT = 0.5;
     public static final double VISION_TOLERANCE = 0.5;
     public static final NeutralMode DT_NEUTRAL_MODE = NeutralMode.Brake;
- 
 }

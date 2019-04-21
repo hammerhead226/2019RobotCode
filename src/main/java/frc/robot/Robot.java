@@ -76,7 +76,6 @@ public class Robot extends TimedRobot {
     arm.log();
     intake.log();
     elevator.log();
-    Limelight.setPipeline(0);
   }
 
   /**

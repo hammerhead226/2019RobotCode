@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -54,6 +55,7 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
 
     Limelight.driverSetting();
+    CameraServer.getInstance().startAutomaticCapture();
     SmartDashboard.putData("Auto mode", chooser);  
     chooser.setDefaultOption("Driver Control", new Wait(0));
     chooser.addOption("Level Two HATCH", new LevelTwoDropHatch(2));
@@ -72,6 +74,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     arm.log();
+    intake.log();
+    elevator.log();
+    Limelight.setPipeline(0);
   }
 
   /**
@@ -103,6 +108,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = chooser.getSelected();
+    Limelight.driverSetting();
 
 
     /*

@@ -12,7 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.auton.LevelTwoDrop;
+import frc.robot.auton.LevelTwoDropBall;
+import frc.robot.auton.LevelTwoDropHatch;
 import frc.robot.commands.Wait;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.DriveTrain;
@@ -54,9 +55,9 @@ public class Robot extends TimedRobot {
 
     Limelight.driverSetting();
     SmartDashboard.putData("Auto mode", chooser);  
-    chooser.setDefaultOption("Level Two Drop", new LevelTwoDrop(1));
-    chooser.addOption("Driver Control", null);
-    chooser.addOption("Do Nothing", new Wait(15));
+    chooser.setDefaultOption("Driver Control", new Wait(0));
+    chooser.addOption("Level Two HATCH", new LevelTwoDropHatch(2));
+    chooser.addOption("Level Two BALL", new LevelTwoDropBall(1));
   }
 
   /**
@@ -123,6 +124,12 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    SmartDashboard.putBoolean("auton done?", m_autonomousCommand.isCompleted());
+
+    if((m_oi.driver.getBACKButtonPressed(0.25) && m_autonomousCommand != null && m_autonomousCommand.isCompleted() ) || m_autonomousCommand.isCompleted()){
+      m_autonomousCommand.cancel();
+      m_autonomousCommand.close();
+    }
 
   }
 

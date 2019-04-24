@@ -10,10 +10,12 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.sensors.PigeonIMU;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import org.hammerhead226.sharkmacro.actions.ActionListParser;
 import org.hammerhead226.sharkmacro.actions.ActionRecorder;
@@ -34,15 +36,23 @@ public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private TalonSRX frontLeft = new TalonSRX(RobotMap.DT_FRONT_LEFT);
-  private TalonSRX frontRight = new TalonSRX(RobotMap.DT_FRONT_RIGHT);
+  //private TalonSRX frontLeft = new TalonSRX(RobotMap.DT_FRONT_LEFT);
+  //private TalonSRX frontRight = new TalonSRX(RobotMap.DT_FRONT_RIGHT);
 
-  private TalonSRX rearLeft = new TalonSRX(RobotMap.DT_REAR_LEFT);
-  private VictorSPX rearRight = new VictorSPX(RobotMap.DT_REAR_RIGHT);
+  private CANSparkMax frontLeft = new CANSparkMax(RobotMap.DT_FRONT_LEFT, MotorType.kBrushless);
+  private CANSparkMax frontRight = new CANSparkMax(RobotMap.DT_FRONT_RIGHT, MotorType.kBrushless);
+  private CANSparkMax rearLeft = new CANSparkMax(RobotMap.DT_REAR_LEFT, MotorType.kBrushless);
+  private CANSparkMax rearRight = new CANSparkMax(RobotMap.DT_REAR_RIGHT, MotorType.kBrushless);
 
-  private PigeonIMU pigeon = new PigeonIMU(rearLeft);
+  private CANEncoder frontLeftEncoder;
+  private CANEncoder frontRightEncoder;
 
-  private ProfileRecorder recorder = new ProfileRecorder(frontLeft, frontRight, RecordingType.VOLTAGE);
+  //private TalonSRX rearLeft = new TalonSRX(RobotMap.DT_REAR_LEFT);
+  //private VictorSPX rearRight = new VictorSPX(RobotMap.DT_REAR_RIGHT);
+
+  //private PigeonIMU pigeon = new PigeonIMU(rearLeft);
+
+  //private ProfileRecorder recorder = new ProfileRecorder(frontLeft, frontRight, RecordingType.VOLTAGE);
 
   @Override
   public void initDefaultCommand() {
@@ -54,69 +64,73 @@ public class DriveTrain extends Subsystem {
     rearLeft.follow(frontLeft);
     rearRight.follow(frontRight);
 
-    frontLeft.setNeutralMode(Constants.DT_NEUTRAL_MODE);
-    frontRight.setNeutralMode(Constants.DT_NEUTRAL_MODE);
-    rearLeft.setNeutralMode(Constants.DT_NEUTRAL_MODE);
-    rearRight.setNeutralMode(Constants.DT_NEUTRAL_MODE);
+    //frontLeft.setNeutralMode(Constants.DT_NEUTRAL_MODE);
+    //frontRight.setNeutralMode(Constants.DT_NEUTRAL_MODE);
+    //rearLeft.setNeutralMode(Constants.DT_NEUTRAL_MODE);
+    //rearRight.setNeutralMode(Constants.DT_NEUTRAL_MODE);
 
     frontLeft.setInverted(Constants.DT_INVERT_L);
-    rearLeft.setInverted(InvertType.FollowMaster);
+    rearLeft.setInverted(Constants.DT_INVERT_L);
+    //rearLeft.setInverted(InvertType.FollowMaster);
 
     frontRight.setInverted(Constants.DT_INVERT_R);
-    rearRight.setInverted(InvertType.FollowMaster);
+    rearRight.setInverted(Constants.DT_INVERT_R);
+    //rearRight.setInverted(InvertType.FollowMaster);
 
-    frontLeft.setSensorPhase(Constants.DT_LEFT_SENSOR_PHASE);
-    frontRight.setSensorPhase(Constants.DT_RIGHT_SENSOR_PHASE);
+    //frontLeft.setSensorPhase(Constants.DT_LEFT_SENSOR_PHASE);
+    //frontRight.setSensorPhase(Constants.DT_RIGHT_SENSOR_PHASE);
 
-    frontLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-    frontRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    //frontLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    //frontRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    frontLeftEncoder = new CANEncoder(frontLeft);
+    frontRightEncoder = new CANEncoder(frontRight);
 
-    frontLeft.configVoltageCompSaturation(Constants.DT_VOLTAGE_LIMIT, Constants.DT_TIMEOUT);
-    rearLeft.configVoltageCompSaturation(Constants.DT_VOLTAGE_LIMIT, Constants.DT_TIMEOUT);
-    frontRight.configVoltageCompSaturation(Constants.DT_VOLTAGE_LIMIT, Constants.DT_TIMEOUT);
-    rearRight.configVoltageCompSaturation(Constants.DT_VOLTAGE_LIMIT, Constants.DT_TIMEOUT);
+    //frontLeft.configVoltageCompSaturation(Constants.DT_VOLTAGE_LIMIT, Constants.DT_TIMEOUT);
+    //rearLeft.configVoltageCompSaturation(Constants.DT_VOLTAGE_LIMIT, Constants.DT_TIMEOUT);
+    //frontRight.configVoltageCompSaturation(Constants.DT_VOLTAGE_LIMIT, Constants.DT_TIMEOUT);
+    //rearRight.configVoltageCompSaturation(Constants.DT_VOLTAGE_LIMIT, Constants.DT_TIMEOUT);
 
-    frontLeft.enableVoltageCompensation(Constants.DT_VOLTAGE_LIMIT_ENABLED);
-    rearLeft.enableVoltageCompensation(Constants.DT_VOLTAGE_LIMIT_ENABLED);
-    frontRight.enableVoltageCompensation(Constants.DT_VOLTAGE_LIMIT_ENABLED);
-    rearRight.enableVoltageCompensation(Constants.DT_VOLTAGE_LIMIT_ENABLED);
+    // frontLeft.enableVoltageCompensation(Constants.DT_VOLTAGE_LIMIT_ENABLED);
+    // rearLeft.enableVoltageCompensation(Constants.DT_VOLTAGE_LIMIT_ENABLED);
+    // frontRight.enableVoltageCompensation(Constants.DT_VOLTAGE_LIMIT_ENABLED);
+    // rearRight.enableVoltageCompensation(Constants.DT_VOLTAGE_LIMIT_ENABLED);
 
-    frontLeft.configContinuousCurrentLimit(Constants.DT_CURRENT_LIMIT, Constants.DT_TIMEOUT);
-    frontRight.configContinuousCurrentLimit(Constants.DT_CURRENT_LIMIT, Constants.DT_TIMEOUT);
+    // frontLeft.configContinuousCurrentLimit(Constants.DT_CURRENT_LIMIT, Constants.DT_TIMEOUT);
+    // frontRight.configContinuousCurrentLimit(Constants.DT_CURRENT_LIMIT, Constants.DT_TIMEOUT);
 
-    frontLeft.enableCurrentLimit(Constants.DT_CURRENT_LIMIT_ENABLED);
-    frontRight.enableCurrentLimit(Constants.DT_CURRENT_LIMIT_ENABLED);
+    // frontLeft.enableCurrentLimit(Constants.DT_CURRENT_LIMIT_ENABLED);
+    // frontRight.enableCurrentLimit(Constants.DT_CURRENT_LIMIT_ENABLED);
 
-    frontLeft.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
-    frontRight.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
-    rearLeft.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
-    rearRight.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
+    // frontLeft.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
+    // frontRight.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
+    // rearLeft.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
+    // rearRight.configOpenloopRamp(Constants.DT_VOLTAGE_RAMP_RATE, Constants.DT_TIMEOUT);
   }
 
-  public void toggleProfileRecording() {
-    if (recorder.isRecording()) {
-      ProfileParser p = new ProfileParser(ProfileParser.getNewFilename());
-      p.writeToFile(recorder.stop().toProfile());
-      System.out.println("Profile saved.");
-    } else {
-      zeroEncoders();
-      Timer.delay(0.2);
-      System.out.println("Profile recording started.");
-      recorder.start();
-    }
-  }
+  // public void toggleProfileRecording() {
+  //   if (recorder.isRecording()) {
+  //     ProfileParser p = new ProfileParser(ProfileParser.getNewFilename());
+  //     p.writeToFile(recorder.stop().toProfile());
+  //     System.out.println("Profile saved.");
+  //   } else {
+  //     zeroEncoders();
+  //     Timer.delay(0.2);
+  //     System.out.println("Profile recording started.");
+  //     recorder.start();
+  //   }
+  // }
 
-  public void toggleActionListRecording() {
-    if (ActionRecorder.isRecording()) {
-      ActionListParser al = new ActionListParser(ActionListParser.getNewFilename());
-      al.writeToFile(ActionRecorder.stop());
-      System.out.println("ActionList saved.");
-    } else {
-      Timer.delay(0.2);
-      ActionRecorder.start();
-      System.out.println("ActionList recording started.");
-    }
-  }
+  // public void toggleActionListRecording() {
+  //   if (ActionRecorder.isRecording()) {
+  //     ActionListParser al = new ActionListParser(ActionListParser.getNewFilename());
+  //     al.writeToFile(ActionRecorder.stop());
+  //     System.out.println("ActionList saved.");
+  //   } else {
+  //     Timer.delay(0.2);
+  //     ActionRecorder.start();
+  //     System.out.println("ActionList recording started.");
+  //   }
+  // }
 
   private double limit(double value) {
     if (value > 1.0) {
@@ -129,8 +143,8 @@ public class DriveTrain extends Subsystem {
   }
 
   public void tankDrive(double left, double right){
-    frontLeft.set(ControlMode.PercentOutput,left);
-    frontRight.set(ControlMode.PercentOutput, right);
+    frontLeft.set(left);
+    frontRight.set(right);
   }
 
   public void cheesyDrive(double xSpeed, double zRotation) {
@@ -166,34 +180,48 @@ public class DriveTrain extends Subsystem {
       }
     }
 
-    frontLeft.set(ControlMode.PercentOutput, limit(leftMotorOutput));
-    frontRight.set(ControlMode.PercentOutput, limit(rightMotorOutput));
+    frontLeft.set(limit(leftMotorOutput));
+    frontRight.set(limit(rightMotorOutput));
 
   }
 
   public void arcadeDrive(double throttle, double turn){
-    frontLeft.set(ControlMode.PercentOutput, throttle-turn);
-    frontRight.set(ControlMode.PercentOutput, throttle + turn);
+    frontLeft.set(throttle-turn);
+    frontRight.set(throttle + turn);
   }
 
-  public TalonSRX[] getMotionProfileTalons() {
-    return new TalonSRX[] { frontLeft, frontRight };
+  public void defense() {
+    
   }
 
-  public double getYaw(){
-    double[] vals = new double[3];
-    pigeon.getYawPitchRoll(vals);
-    return vals[0];
-  }
+  // public TalonSRX[] getMotionProfileTalons() {
+  //   return new TalonSRX[] { frontLeft, frontRight };
+  // }
+
+  // public double getYaw(){
+  //   double[] vals = new double[3];
+  //   pigeon.getYawPitchRoll(vals);
+  //   return vals[0];
+  // }
 
   public void zeroEncoders() {
-    frontLeft.setSelectedSensorPosition(0, 0, 0);
-    frontRight.setSelectedSensorPosition(0, 0, 0);
+    // frontLeft.setSelectedSensorPosition(0, 0, 0);
+    // frontRight.setSelectedSensorPosition(0, 0, 0);
+
+    frontLeftEncoder.setPosition(0);
+    frontRightEncoder.setPosition(0);
     System.out.println("Drivetrain encoders zeroed.");
   }
 
-  public void zeroYaw(){
-    pigeon.setYaw(0);
-    pigeon.setFusedHeading(0);
+  public double[] getPositions() {
+    double[] pos = new double[2];
+    pos[0] = frontLeftEncoder.getPosition();
+    pos[1] = frontRightEncoder.getPosition();
+    return pos;
   }
+
+  // public void zeroYaw(){
+  //   pigeon.setYaw(0);
+  //   pigeon.setFusedHeading(0);
+  // }
 }

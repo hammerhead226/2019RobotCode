@@ -11,6 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class DT_CheesyDrive extends Command {
+
+  private boolean isDefense = false;
+  private double[] holdPositions;
+
   public DT_CheesyDrive() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.driveTrain);
@@ -24,8 +28,17 @@ public class DT_CheesyDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    Robot.driveTrain.cheesyDrive(0.85 * -Robot.m_oi.driver.getLeftJoystick_Y(), 0.75 * Robot.m_oi.driver.getRightJoystick_X());
+    if(Robot.m_oi.driver.getAButtonPressed()) {
+      isDefense = !isDefense;
+      if(isDefense) {
+        holdPositions = Robot.driveTrain.getPositions();
+      }
+    }
+    if(isDefense) {
+      Robot.driveTrain.tankDrive(-(Robot.driveTrain.getPositions()[0] - holdPositions[0]) / 5, -(Robot.driveTrain.getPositions()[1] - holdPositions[1]) / 5);
+    } else {
+      Robot.driveTrain.cheesyDrive(0.85 * -Robot.m_oi.driver.getLeftJoystick_Y(), 0.75 * Robot.m_oi.driver.getRightJoystick_X());
+    }
   }
   // Make this return true when this Command no longer needs to run execute()
   @Override

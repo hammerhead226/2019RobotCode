@@ -34,9 +34,9 @@ public class LevelTwoDropHatch extends TimedCommand {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.intake.driveIntake(-0.5);
     if(timer.get() <=1.0){
     Robot.driveTrain.cheesyDrive(0.85, 0);
+    Robot.intake.driveIntake(-0.5);
     }else{
       Robot.driveTrain.cheesyDrive(0, 0);
     }

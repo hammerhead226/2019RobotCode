@@ -28,7 +28,7 @@ public class Elevator extends Subsystem {
   private VictorSPX three = new VictorSPX(RobotMap.EL_THREE);
   private VictorSPX four = new VictorSPX(RobotMap.EL_FOUR);
 
-  private TalonSRX roller = new TalonSRX(RobotMap.EL_ROLLER);
+  private VictorSPX roller = new VictorSPX(RobotMap.EL_ROLLER);
 
 
   private int position = 0;
@@ -40,7 +40,8 @@ public class Elevator extends Subsystem {
   }
 
   public void log(){
-    SmartDashboard.putNumber("elevator current",one.getOutputCurrent());
+    SmartDashboard.putNumber("elevator one current",one.getOutputCurrent());
+    SmartDashboard.putNumber("elevator two current", two.getOutputCurrent());
   }
 
   public Elevator(){
@@ -73,11 +74,9 @@ public class Elevator extends Subsystem {
 
     one.configContinuousCurrentLimit(Constants.EL_CURRENT_LIMIT, Constants.EL_TIMEOUT);
     two.configContinuousCurrentLimit(Constants.EL_CURRENT_LIMIT, Constants.EL_TIMEOUT);
-    roller.configContinuousCurrentLimit(Constants.EL_CURRENT_LIMIT, Constants.EL_TIMEOUT);
 
     one.enableCurrentLimit(Constants.EL_CURRENT_LIMIT_ENABLED);
     two.enableCurrentLimit(Constants.EL_CURRENT_LIMIT_ENABLED);
-    roller.enableCurrentLimit(Constants.EL_CURRENT_LIMIT_ENABLED);
 
   }
   

@@ -23,7 +23,7 @@ public class PneumaticsSystem extends Subsystem {
 
   public PneumaticsSystem() {
     compressorOn();
-    rightIntake.set(DoubleSolenoid.Value.kForward);
+    shiftIntake();
   }
 
   public void compressorOn() {
@@ -48,61 +48,25 @@ public class PneumaticsSystem extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  private DoubleSolenoid leftIntake = new DoubleSolenoid(RobotMap.INTAKE_LEFT_SHIFTER_1,
-      RobotMap.INTAKE_LEFT_SHIFTER_2);
-  private DoubleSolenoid rightIntake = new DoubleSolenoid(RobotMap.INTAKE_RIGHT_SHIFTER_1,
-      RobotMap.INTAKE_RIGHT_SHIFTER_2);
-  private DoubleSolenoid arm = new DoubleSolenoid(RobotMap.ARM_SHIFTER_1, RobotMap.ARM_SHIFTER_2);
+  private DoubleSolenoid intake = new DoubleSolenoid(RobotMap.INTAKE_SHIFTER_1,
+      RobotMap.INTAKE_SHIFTER_2);
 
-  private DoubleSolenoid.Value leftIntakeVal = DoubleSolenoid.Value.kOff;
+  private DoubleSolenoid.Value intakeVal = DoubleSolenoid.Value.kOff;
 
-  public void shiftIntakeLeft() {
-    if (leftIntakeVal == DoubleSolenoid.Value.kForward) {
-      leftIntakeVal = DoubleSolenoid.Value.kReverse;
+  public void shiftIntake() {
+    if (intakeVal == DoubleSolenoid.Value.kForward) {
+      intakeVal = DoubleSolenoid.Value.kReverse;
     } else {
-      leftIntakeVal = DoubleSolenoid.Value.kForward;
+      intakeVal = DoubleSolenoid.Value.kForward;
     }
-    leftIntake.set(leftIntakeVal);
-  }
-
-  private DoubleSolenoid.Value rightIntakeVal = DoubleSolenoid.Value.kOff;
-
-  public void shiftIntakeRight() {
-    if (rightIntakeVal == DoubleSolenoid.Value.kForward) {
-      rightIntakeVal = DoubleSolenoid.Value.kReverse;
-    } else {
-      rightIntakeVal = DoubleSolenoid.Value.kForward;
-    }
-    rightIntake.set(rightIntakeVal);
-  }
-
-  public void shiftIntake(){
-    shiftIntakeRight();
-    shiftIntakeLeft();
+    intake.set(intakeVal);
   }
 
   public void shiftIntakeForward(){
-    rightIntake.set(DoubleSolenoid.Value.kForward);
+    intake.set(DoubleSolenoid.Value.kForward);
   }
 
   public void shiftIntakeNeutral(){
-    rightIntake.set(DoubleSolenoid.Value.kOff);
-    leftIntake.set(DoubleSolenoid.Value.kOff);
+    intake.set(DoubleSolenoid.Value.kOff);
   }
-
-  private DoubleSolenoid.Value armVal = DoubleSolenoid.Value.kOff;
-
-  public void shiftArm() {
-    if (armVal == DoubleSolenoid.Value.kForward) {
-      armVal = DoubleSolenoid.Value.kReverse;
-    } else {
-      armVal = DoubleSolenoid.Value.kForward;
-    }
-    arm.set(armVal);
-  }
-
-  public void shiftArmNeutral(){
-    arm.set(DoubleSolenoid.Value.kOff);;
-  }
-
 }

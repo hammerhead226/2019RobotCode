@@ -10,8 +10,10 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.ControlType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -29,7 +31,16 @@ public class DriveTrain extends Subsystem {
   private CANSparkMax rearLeft = new CANSparkMax(RobotMap.DT_REAR_LEFT, MotorType.kBrushless);
   private CANSparkMax rearRight = new CANSparkMax(RobotMap.DT_REAR_RIGHT, MotorType.kBrushless);
 
+  double frontLeftPos;
+  double frontRightPos;
+  double rearLeftPos;
+  double rearRightPos;
+
   public void log(){
+    SmartDashboard.putNumber("FL", frontLeft.getEncoder().getPosition());
+    SmartDashboard.putNumber("FR", frontRight.getEncoder().getPosition());
+    SmartDashboard.putNumber("RL", rearLeft.getEncoder().getPosition());
+    SmartDashboard.putNumber("RR", rearRight.getEncoder().getPosition());
   }
 
   @Override
@@ -66,7 +77,11 @@ public class DriveTrain extends Subsystem {
     frontRight.setOpenLoopRampRate(Constants.DT_VOLTAGE_RAMP_RATE);
     rearLeft.setOpenLoopRampRate(Constants.DT_VOLTAGE_RAMP_RATE);
     rearRight.setOpenLoopRampRate(Constants.DT_VOLTAGE_RAMP_RATE);
-
+   
+    frontLeft.getPIDController().setP(1);
+    frontRight.getPIDController().setP(1);
+    rearLeft.getPIDController().setP(1);
+    rearRight.getPIDController().setP(1);
   }
 
   private double limit(double value) {
@@ -94,9 +109,11 @@ public class DriveTrain extends Subsystem {
     }
 
     if(slow){
-      xSpeed *= 0.5;
-      zRotation *= 0.8;
+      xSpeed *= 0.7;
+      zRotation *= 0.5;
     }
+
+    SmartDashboard.putBoolean("slow?", slow);
 
     xSpeed = limit(xSpeed);
     zRotation = limit(zRotation);
@@ -132,6 +149,8 @@ public class DriveTrain extends Subsystem {
     frontLeft.set(limit(leftMotorOutput));
     frontRight.set(limit(rightMotorOutput));
 
+    updatePosition();
+
   }
 
   public void arcadeDrive(double throttle, double turn) {
@@ -150,6 +169,16 @@ public class DriveTrain extends Subsystem {
     frontLeft.setEncPosition(0);
     frontRight.setEncPosition(0);
     System.out.println("Drivetrain encoders zeroed.");
+  }
+
+  void updatePosition(){
+    frontLeftPos = frontLeft.getEncoder().getPosition();
+    frontRightPos = frontRight.getEncoder().getPosition();
+  }
+
+  public void brakeMode(){
+    frontLeft.getPIDController().setReference(frontLeftPos, ControlType.kPosition);
+    frontRight.getPIDController().setReference(frontRightPos, ControlType.kPosition);
   }
 
 }

@@ -10,10 +10,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class DT_CheesyDrive extends Command {
-  public DT_CheesyDrive() {
+public class DT_Brake extends Command {
+  public DT_Brake() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.driveTrain);
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
@@ -24,12 +24,7 @@ public class DT_CheesyDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (Robot.m_oi.driver.getLBButtonPressed()) {
-      Robot.driveTrain.cheesyDrive(-Robot.m_oi.driver.getLeftJoystick_Y(), Robot.m_oi.driver.getRightJoystick_X());
-    }else{
-    Robot.driveTrain.cheesyDrive(0.765 * -Robot.m_oi.driver.getLeftJoystick_Y(),
-        0.675 * Robot.m_oi.driver.getRightJoystick_X());
-    }
+    Robot.driveTrain.brakeMode();
   }
 
   // Make this return true when this Command no longer needs to run execute()

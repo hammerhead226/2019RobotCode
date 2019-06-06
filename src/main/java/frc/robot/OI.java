@@ -13,6 +13,7 @@ import frc.robot.commands.A_SetpointHatch;
 import frc.robot.commands.A_SetpointHigh;
 import frc.robot.commands.A_SetpointRocket;
 import frc.robot.commands.A_ZeroEncoder;
+import frc.robot.commands.DT_Brake;
 import frc.robot.commands.PS_ShiftIntake;
 import frc.robot.commands.PS_ToggleCompressor;
 import util.Controller;
@@ -26,7 +27,8 @@ public class OI {
   public Controller manip = new Controller(1);
 
   public OI(){
-    driver.getXButton().whenPressed(new PS_ToggleCompressor());
+    driver.getYButton().whenPressed(new PS_ToggleCompressor());
+    driver.getXButton().whileHeld(new DT_Brake());
 
     manip.getLBButton().whenPressed(new PS_ShiftIntake());
 

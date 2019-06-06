@@ -7,6 +7,7 @@
 
 package frc.robot.auton;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
@@ -17,6 +18,7 @@ public class LevelTwoDropBall extends TimedCommand {
   /**
    * Add your docs here.
    */
+  Timer timer = new Timer();
   public LevelTwoDropBall(double timeout) {
     super(timeout);
     // Use requires() here to declare subsystem dependencies
@@ -31,7 +33,11 @@ public class LevelTwoDropBall extends TimedCommand {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveTrain.cheesyDrive(0.85, 0);
+    if (timer.get() <= 2.0) {
+      Robot.driveTrain.cheesyDrive(-0.45, 0);
+    } else {
+      Robot.driveTrain.cheesyDrive(0, 0);
+    }
   }
 
   // Called once after timeout

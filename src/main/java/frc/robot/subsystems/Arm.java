@@ -39,7 +39,6 @@ public class Arm extends Subsystem {
   public void log(){
     SmartDashboard.putNumber("arm setpoint", setpointPosition);
     SmartDashboard.putNumber("arm absolute position", main.getSelectedSensorPosition());
-    //SmartDashboard.putNumber("arm absolute position", main.getSensorCollection().getPulseWidthPosition());
     SmartDashboard.putNumber("target", main.getClosedLoopTarget());
     SmartDashboard.putNumber("error", main.getClosedLoopError());
   }

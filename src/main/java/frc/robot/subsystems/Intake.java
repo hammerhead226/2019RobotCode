@@ -25,11 +25,11 @@ public class Intake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private TalonSRX intake = new TalonSRX(RobotMap.INTAKE);
+  private VictorSPX intake = new VictorSPX(RobotMap.INTAKE);
   private VictorSPX roller = new VictorSPX(RobotMap.INTAKE_ROLLER);
 
   public void log(){
-    SmartDashboard.putNumber("intake pull", intake.getMotorOutputPercent());
+    SmartDashboard.putNumber("intake PO", intake.getMotorOutputPercent());
   }
 
   @Override
@@ -50,11 +50,11 @@ public class Intake extends Subsystem {
   }
 
   public void driveIntake(double speed) {
+    if(speed < 0){
+      speed *= 0.9;
+    }
     intake.set(ControlMode.PercentOutput, -0.8 * speed);
     roller.set(ControlMode.PercentOutput, speed);
   }
 
-  public boolean isStalling(){
-    return intake.getOutputCurrent() > 65;
-  }
 }

@@ -74,8 +74,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     arm.log();
-    intake.log();
-    elevator.log();
+    //intake.log();
+    //elevator.log();
+    driveTrain.log();
   }
 
   /**
@@ -89,6 +90,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
+    
     Scheduler.getInstance().run();
   }
 

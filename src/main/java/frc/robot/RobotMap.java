@@ -19,7 +19,7 @@ public class RobotMap {
   public static int DT_FRONT_RIGHT = 5;
   public static int DT_REAR_RIGHT = 6;
 
-  public static int INTAKE = 7;
+  public static int INTAKE = 16;
   public static int INTAKE_ROLLER = 13;
 
   public static int INTAKE_SHIFTER_1 = 1;
@@ -30,7 +30,7 @@ public class RobotMap {
   public static int EL_THREE = 11;
   public static int EL_FOUR = 12;
 
-  public static final int EL_ROLLER = 16;
+  public static final int EL_ROLLER = 14;
 
   public static int ARM_SHIFTER_1 = 0;
   public static int ARM_SHIFTER_2 = 7;

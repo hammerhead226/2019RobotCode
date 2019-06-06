@@ -69,7 +69,7 @@ public class Constants {
     public static final int ARM_SOFT_LIMIT = ArmSetpoint.STRAIGHT_UP.position + 100;
 
     //PID
-    public static final double ARM_P = 0.5;
+    public static final double ARM_P = 2.2;
 
     //Misc
     public static final double DT_VOLTAGE_RAMP_RATE = 0.1;

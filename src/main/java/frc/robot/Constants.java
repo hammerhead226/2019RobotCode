@@ -76,5 +76,6 @@ public class Constants {
     public static final double ARM_PEAK_OUTPUT = 0.5;
     public static final double VISION_TOLERANCE = 0.5;
     public static final NeutralMode DT_NEUTRAL_MODE = NeutralMode.Brake;
+    public static final double DT_SPEED_CHANGE_LIMIT = 0.02;
  
 }

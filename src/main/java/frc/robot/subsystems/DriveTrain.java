@@ -44,6 +44,8 @@ public class DriveTrain extends Subsystem {
 
   private ProfileRecorder recorder = new ProfileRecorder(frontLeft, frontRight, RecordingType.VOLTAGE);
 
+  private double lastSpeed = 0;
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
@@ -135,6 +137,14 @@ public class DriveTrain extends Subsystem {
 
   public void cheesyDrive(double xSpeed, double zRotation) {
 
+    double change = xSpeed - lastSpeed;
+
+    if(change < -Constants.DT_SPEED_CHANGE_LIMIT) {
+      change = -Constants.DT_SPEED_CHANGE_LIMIT;
+    }
+    
+    xSpeed = lastSpeed + change;
+
     xSpeed = limit(xSpeed);
     zRotation = limit(zRotation);
 
@@ -169,6 +179,7 @@ public class DriveTrain extends Subsystem {
     frontLeft.set(ControlMode.PercentOutput, limit(leftMotorOutput));
     frontRight.set(ControlMode.PercentOutput, limit(rightMotorOutput));
 
+    lastSpeed = xSpeed;
   }
 
   public void arcadeDrive(double throttle, double turn){
